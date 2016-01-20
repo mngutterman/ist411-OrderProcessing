@@ -12,11 +12,40 @@ import java.util.Map;
  * @author Matt
  */
 public class inventory {
-    //private ArrayList<inventoryItem> elements
-    private Map<String, inventoryItem> items = new HashMap<String, inventoryItem>();
+
+    private Map<String, inventoryItem> items = new HashMap<String, inventoryItem>(); 
+    
+    public inventory(){
+         
+    }
     
     public inventory(HashMap<String, inventoryItem> _items)
     {
         items = _items;
     }
+    
+    public Map<String, inventoryItem> getItems()
+    {
+        return items;
+    }
+    
+    public void addItem(inventoryItem _item)
+    {
+        String itemName = _item.getName();
+        int itemQuantity = _item.getQuantity();
+        double itemCost = _item.getCost();
+                
+        inventoryItem item = items.get(itemName);
+        
+        if (item != null) {
+            item.increaseQuantityBy(itemQuantity);
+        }
+        // item has not been created in our hashMap. create it and set its quantity / cost
+        else 
+        {
+            item = new inventoryItem(itemName, itemQuantity, itemCost);
+            items.put(itemName,item);
+        }
+    }
+    
 }

@@ -12,15 +12,28 @@ package orderProcessing;
 public class inventoryItem {
     private String name;
     private int quantity;
+    private double cost;
             
     public inventoryItem()
     {
     }
-    public inventoryItem(String _name, int _quantity)
+    public inventoryItem(String _name, int _quantity, double _cost)
     {
         name = _name;
         quantity = _quantity;
+        cost = _cost;
     }
+    
+    public double getCost()
+    {
+        return cost;
+    }
+    
+    public String getName()
+    {
+        return name;
+    }
+    
     public int getQuantity()
     {
         return quantity;
