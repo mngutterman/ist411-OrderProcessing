@@ -9,6 +9,11 @@ package orderProcessing;
  *
  * @author Matt
  */
-public class transaction {
-    
+public abstract class transaction {
+    public transaction()
+    {
+        int transactionID;
+        inventoryItem item;
+        int quanity;
+    }
 }
