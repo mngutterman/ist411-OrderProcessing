@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author Matt
  */
-public class orderProcessing {
+public class OrderProcessing {
 
     /*
     
@@ -25,9 +25,10 @@ public class orderProcessing {
      */
     public static void main(String[] args) {
         //populateInventoryWithItems();
-        inventory inv = new inventory();
+        Inventory inv = new Inventory();
         inv.populateInventoryWithItems();
         
+        Customer customer1 = new Customer(0, "John");
         
         // this will iterate over all the elements of the inventory hashMap
         Iterator it = inv.getItems().entrySet().iterator();
@@ -35,7 +36,7 @@ public class orderProcessing {
             Map.Entry pair = (Map.Entry)it.next();
             
             String name = (String) pair.getKey();
-            inventoryItem item = (inventoryItem) pair.getValue();
+            InventoryItem item = (InventoryItem) pair.getValue();
             
             System.out.println("item : " + name + ", quantity: " + item.getQuantity() + ", cost: " + item.getCost());
             it.remove(); // avoids a ConcurrentModificationException

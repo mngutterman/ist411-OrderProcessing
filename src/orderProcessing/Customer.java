@@ -9,11 +9,11 @@ package orderProcessing;
  *
  * @author Matt
  */
-public class customer {
+public class Customer {
     private int customerID;
     private String customerName;
     
-    public customer(int _customerID, String _customerName){
+    public Customer(int _customerID, String _customerName){
         customerID = _customerID;
         customerName = _customerName;
     }

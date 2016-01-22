@@ -9,15 +9,15 @@ package orderProcessing;
  *
  * @author Matt
  */
-public class inventoryItem {
+public class InventoryItem {
     private String name;
     private int quantity;
     private double cost;
             
-    public inventoryItem()
+    public InventoryItem()
     {
     }
-    public inventoryItem(String _name, int _quantity, double _cost)
+    public InventoryItem(String _name, int _quantity, double _cost)
     {
         name = _name;
         quantity = _quantity;

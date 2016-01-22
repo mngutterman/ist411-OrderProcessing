@@ -12,31 +12,31 @@ import java.util.Map;
  *
  * @author Matt
  */
-public class inventory {
+public class Inventory {
 
-    private Map<String, inventoryItem> items = new HashMap<String, inventoryItem>(); 
+    private Map<String, InventoryItem> items = new HashMap<String, InventoryItem>(); 
     
-    public inventory(){
+    public Inventory(){
          
     }
     
-    public inventory(HashMap<String, inventoryItem> _items)
+    public Inventory(HashMap<String, InventoryItem> _items)
     {
         items = _items;
     }
     
-    public Map<String, inventoryItem> getItems()
+    public Map<String, InventoryItem> getItems()
     {
         return items;
     }
     
-    public void addItem(inventoryItem _item)
+    public void addItem(InventoryItem _item)
     {
         String itemName = _item.getName();
         int itemQuantity = _item.getQuantity();
         double itemCost = _item.getCost();
                 
-        inventoryItem item = items.get(itemName);
+        InventoryItem item = items.get(itemName);
         
         if (item != null) {
             item.increaseQuantityBy(itemQuantity);
@@ -44,7 +44,7 @@ public class inventory {
         // item has not been created in our hashMap. create it and set its quantity / cost
         else 
         {
-            item = new inventoryItem(itemName, itemQuantity, itemCost);
+            item = new InventoryItem(itemName, itemQuantity, itemCost);
             items.put(itemName,item);
         }
     }
@@ -52,8 +52,8 @@ public class inventory {
     
     public void populateInventoryWithItems()
     {
-        inventoryItem item1 = new inventoryItem("pen",2, .50);
-        inventoryItem item2 = new inventoryItem("paper",1, 1.0);
+        InventoryItem item1 = new InventoryItem("pen",2, .50);
+        InventoryItem item2 = new InventoryItem("paper",1, 1.0);
         
         this.addItem(item1);
         this.addItem(item2);

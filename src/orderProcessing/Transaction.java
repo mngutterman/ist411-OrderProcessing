@@ -9,11 +9,11 @@ package orderProcessing;
  *
  * @author Matt
  */
-public abstract class transaction {
+public abstract class Transaction {
     
     int transactionID;
     
-    public transaction(int id)
+    public Transaction(int id)
     {
         transactionID = id;
     }
