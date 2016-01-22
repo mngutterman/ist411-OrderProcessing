@@ -10,10 +10,22 @@ package orderProcessing;
  * @author Matt
  */
 public abstract class transaction {
-    public transaction()
+    
+    int transactionID;
+    
+    public transaction(int id)
     {
-        int transactionID;
-        inventoryItem item;
-        int quanity;
+        transactionID = id;
     }
+    
+    public int getTransactionID()
+    {
+        return transactionID;
+    }
+    
+    //private inventoryItem item;
+    //private int quanity;
+
+    public abstract void process();        
 }
+

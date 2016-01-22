@@ -14,19 +14,22 @@ import java.util.Map;
  */
 public class orderProcessing {
 
+    /*
+    
+    Order : check inventory -> tell it to make a sale (generate sale)
+    Sale: make sale (don't check inventory?)
+    */
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        inventoryItem item1 = new inventoryItem("pen",2, .50);
-        inventoryItem item2 = new inventoryItem("paper",1, 1.0);
-        
+        //populateInventoryWithItems();
         inventory inv = new inventory();
-        inv.addItem(item1);
-        inv.addItem(item2);
+        inv.populateInventoryWithItems();
         
         
-        
+        // this will iterate over all the elements of the inventory hashMap
         Iterator it = inv.getItems().entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
@@ -37,7 +40,5 @@ public class orderProcessing {
             System.out.println("item : " + name + ", quantity: " + item.getQuantity() + ", cost: " + item.getCost());
             it.remove(); // avoids a ConcurrentModificationException
         }
-        //inventory inv = new inventory();
     }
-    
 }

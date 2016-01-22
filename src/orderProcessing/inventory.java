@@ -6,6 +6,7 @@
 package orderProcessing;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 /**
  *
@@ -46,6 +47,18 @@ public class inventory {
             item = new inventoryItem(itemName, itemQuantity, itemCost);
             items.put(itemName,item);
         }
+    }
+    
+    
+    public void populateInventoryWithItems()
+    {
+        inventoryItem item1 = new inventoryItem("pen",2, .50);
+        inventoryItem item2 = new inventoryItem("paper",1, 1.0);
+        
+        this.addItem(item1);
+        this.addItem(item2);
+        
+        
     }
     
 }
