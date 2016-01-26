@@ -1,1 +1,6 @@
 I realized I don't actually have your contact info.  Anyway, I'm not feeling great today so I won't be around, but I'll keep working on the order processing stuff. Hopefully you see this file...
+
+
+Word, my number is 202 352 0365, text me if you have any questions about some of the code I wrote.
+The most not straightforward thing I did was made inventory a singleton class. If you're not sure what that
+is I can explain it to you
