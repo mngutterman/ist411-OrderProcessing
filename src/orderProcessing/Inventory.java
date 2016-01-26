@@ -71,6 +71,11 @@ public class Inventory {
         }
     }
     
+    protected double getCash()
+    {
+        return cash;
+    }
+    
     
     private void populateInventoryWithItems()
     {
