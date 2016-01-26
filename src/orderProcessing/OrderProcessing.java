@@ -25,13 +25,17 @@ public class OrderProcessing {
      */
     public static void main(String[] args) {
         //populateInventoryWithItems();
-        Inventory inv = new Inventory();
-        inv.populateInventoryWithItems();
+        Inventory inv = Inventory.getInstance();//new Inventory();
+        
+        //inv.populateInventoryWithItems();
         
         Customer customer1 = new Customer(0, "John");
         
+        Order order = new Order(0,"pen",5);
+        order.process();
+        
         // this will iterate over all the elements of the inventory hashMap
-        Iterator it = inv.getItems().entrySet().iterator();
+        /*Iterator it = inv.getItems().entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
             
@@ -40,6 +44,6 @@ public class OrderProcessing {
             
             System.out.println("item : " + name + ", quantity: " + item.getQuantity() + ", cost: " + item.getCost());
             it.remove(); // avoids a ConcurrentModificationException
-        }
+        }*/
     }
 }

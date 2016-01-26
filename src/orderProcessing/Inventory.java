@@ -6,7 +6,6 @@
 package orderProcessing;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 /**
  *
@@ -14,23 +13,26 @@ import java.util.Map;
  */
 public class Inventory {
 
+    //singleton instance of inventory
+    private static Inventory inventory = new Inventory( );
+    
     private Map<String, InventoryItem> items = new HashMap<String, InventoryItem>(); 
-    
-    public Inventory(){
-         
+
+    private/*public*/ Inventory(){
+         populateInventoryWithItems();
     }
     
-    public Inventory(HashMap<String, InventoryItem> _items)
-    {
-        items = _items;
+    // factory method
+    public static Inventory getInstance( ) {
+      return inventory;
     }
     
-    public Map<String, InventoryItem> getItems()
+    protected/*public*/ Map<String, InventoryItem> getItems()
     {
         return items;
     }
     
-    public void addItem(InventoryItem _item)
+    protected/*public*/ void addItem(InventoryItem _item)
     {
         String itemName = _item.getName();
         int itemQuantity = _item.getQuantity();
@@ -50,14 +52,14 @@ public class Inventory {
     }
     
     
-    public void populateInventoryWithItems()
+    private void populateInventoryWithItems()
     {
         InventoryItem item1 = new InventoryItem("pen",2, .50);
         InventoryItem item2 = new InventoryItem("paper",1, 1.0);
         
-        this.addItem(item1);
-        this.addItem(item2);
-        
+        this.items.put(item1.getName(), item1);
+        this.items.put(item2.getName(), item2);
+
         
     }
     
