@@ -42,6 +42,8 @@ public class Order extends Transaction {
             {
                 // create a sale
                 System.out.println("SALE");
+                Sale sale = new Sale(0,item.getName(),quantity);
+                sale.process();
                 
             }
             else 
@@ -60,25 +62,3 @@ public class Order extends Transaction {
 
     }
 }
-
-/*class Student extends Person implements Comparable<Person> {
-
-    private int id;
-
-    public Student(String name, int id) {
-        super(name);
-        this.id = id;
-    }
-
-    public int getID() {
-        return id;
-    }
-
-    public void setID(int newID) {
-        id = newID;
-    }
-
-    public String toString() {
-        return id + ", " + name;
-    }
-}*/

@@ -31,8 +31,9 @@ public class OrderProcessing {
         
         Customer customer1 = new Customer(0, "John");
         
-        Order order = new Order(0,"pen",5);
-        order.process();
+        Order order = new Order(0,"pen",1);
+        customer1.submitTransaction(order);
+
         
         // this will iterate over all the elements of the inventory hashMap
         /*Iterator it = inv.getItems().entrySet().iterator();

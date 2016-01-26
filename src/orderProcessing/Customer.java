@@ -34,4 +34,9 @@ public class Customer {
     {
         customerName = _customerName;
     }
+    
+    public void submitTransaction(Transaction transaction)
+    {
+        transaction.process();
+    }
 }
