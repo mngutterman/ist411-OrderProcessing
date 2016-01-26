@@ -24,16 +24,15 @@ public class OrderProcessing {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //populateInventoryWithItems();
-        Inventory inv = Inventory.getInstance();//new Inventory();
         
-        //inv.populateInventoryWithItems();
-        
+        Inventory inv = Inventory.getInstance();
+                
         Customer customer1 = new Customer(0, "John");
         
-        Order order = new Order(0,"pen",1);
+        Order order = new Order(0,"pen",1, customer1);
         customer1.submitTransaction(order);
 
+        System.out.println("blah");
         
         // this will iterate over all the elements of the inventory hashMap
         /*Iterator it = inv.getItems().entrySet().iterator();

@@ -17,15 +17,17 @@ public class Order extends Transaction {
     Inventory inventory = Inventory.getInstance();
     private String itemName;
     private int quantity;
+    private Customer customer;
     
     /*public Order(int id) {
         super(id);
     }*/
     
-    public Order(int id, String _itemName, int _quantity) {
+    public Order(int id, String _itemName, int _quantity, Customer _customer) {
         super(id);
         this.itemName = _itemName;
         this.quantity = _quantity;
+        this.customer = _customer;
     }
     
     @Override
@@ -42,7 +44,7 @@ public class Order extends Transaction {
             {
                 // create a sale
                 System.out.println("SALE");
-                Sale sale = new Sale(0,item.getName(),quantity);
+                Sale sale = new Sale(0,item.getName(),quantity, customer);
                 sale.process();
                 
             }

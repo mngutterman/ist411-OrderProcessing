@@ -3,4 +3,7 @@ I realized I don't actually have your contact info.  Anyway, I'm not feeling gre
 
 Word, my number is 202 352 0365, text me if you have any questions about some of the code I wrote.
 The most not straightforward thing I did was made inventory a singleton class. If you're not sure what that
-is I can explain it to you
+is I can explain it to you.
+
+
+Yo this whole thing is actually due on thursday so we should probably get moving.

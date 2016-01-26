@@ -15,11 +15,13 @@ public class Sale extends Transaction{
     Inventory inventory = Inventory.getInstance();
     private String itemName;
     private int quantity;
+    private Customer customer;
     
-    public Sale(int id, String _itemName, int _quantity) {
+    public Sale(int id, String _itemName, int _quantity, Customer _customer) {
         super(id);
         this.itemName = _itemName;
         this.quantity = _quantity;
+        this.customer = _customer;
     }
     
     @Override
@@ -28,12 +30,10 @@ public class Sale extends Transaction{
         Map<String, InventoryItem> items = inventory.getItems();
         InventoryItem item = items.get(itemName);
         
-        // TODO:Add item to user cart
-        
-        
+        customer.addItemToCart(item, this.quantity);
         item.decreaseQuantityBy(this.quantity);
-                
-       
-
+        double cashToAddToInventory = item.getCost() * this.quantity;
+        inventory.addCash(cashToAddToInventory);
+        System.out.println("blah");
     }
 }

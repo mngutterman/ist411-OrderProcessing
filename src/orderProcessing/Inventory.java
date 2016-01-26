@@ -17,9 +17,11 @@ public class Inventory {
     private static Inventory inventory = new Inventory( );
     
     private Map<String, InventoryItem> items = new HashMap<String, InventoryItem>(); 
+    private double cash;
 
     private/*public*/ Inventory(){
          populateInventoryWithItems();
+         this.cash = 10000;
     }
     
     // factory method
@@ -48,6 +50,24 @@ public class Inventory {
         {
             item = new InventoryItem(itemName, itemQuantity, itemCost);
             items.put(itemName,item);
+        }
+    }
+    
+    protected void addCash(double cashAmount)
+    {
+        cash += cashAmount;
+    }
+    
+    protected boolean removeCash(double cashAmount)
+    {
+        if (this.cash - cashAmount > 0)
+        {
+            cash -= cashAmount;
+            return true;
+        }
+        else 
+        {
+            return false;
         }
     }
     

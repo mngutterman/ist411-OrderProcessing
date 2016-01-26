@@ -5,6 +5,9 @@
  */
 package orderProcessing;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author Matt
@@ -13,6 +16,9 @@ public class Customer {
     private int customerID;
     private String customerName;
     
+    // cart is a dictionary of item : quanity
+    private Map<InventoryItem, Integer> cart = new HashMap<InventoryItem, Integer>(); 
+
     public Customer(int _customerID, String _customerName){
         customerID = _customerID;
         customerName = _customerName;
@@ -33,6 +39,16 @@ public class Customer {
     public void setCustomerName(String _customerName)
     {
         customerName = _customerName;
+    }
+    
+    public void addItemToCart(InventoryItem item, Integer quantity)
+    {
+        cart.put(item, quantity);
+    }
+    
+    public void clearCart()
+    {
+        cart.clear();
     }
     
     public void submitTransaction(Transaction transaction)
