@@ -32,21 +32,18 @@ public class OrderProcessing {
         //Order order = new Order(0,"pen",1, customer1);
         //customer1.submitTransaction(order);
 
-        Return ret = new Return(0, "pen", 5);
-        customer1.submitTransaction(ret);
+        //Return ret = new Return(0, "pen", 5);
+        //customer1.submitTransaction(ret);
+        
+        //InventoryAdjustment adj = new InventoryAdjustment(0, "pen", 2);
+        //customer1.submitTransaction(adj);
+        
+        Exchange exchange = new Exchange(0, "paper", "pen");
+        customer1.submitTransaction(exchange);
+        
         
         System.out.println("blah");
         
-        // this will iterate over all the elements of the inventory hashMap
-        /*Iterator it = inv.getItems().entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            
-            String name = (String) pair.getKey();
-            InventoryItem item = (InventoryItem) pair.getValue();
-            
-            System.out.println("item : " + name + ", quantity: " + item.getQuantity() + ", cost: " + item.getCost());
-            it.remove(); // avoids a ConcurrentModificationException
-        }*/
+        
     }
 }
