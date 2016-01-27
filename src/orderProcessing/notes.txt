@@ -2,10 +2,6 @@ I realized I don't actually have your contact info.  Anyway, I'm not feeling gre
 
 
 Word, my number is 202 352 0365, text me if you have any questions about some of the code I wrote.
-The most not straightforward thing I did was made inventory a singleton class. If you're not sure what that
-is I can explain it to you.
 
-
-Yo this whole thing is actually due on thursday so we should probably get moving.
-    - most places that I just System.out.printLn, we need to prompt the user and stuff.
-    - I didn't spent a ton of time debugging, just the basics. check it out if you can.
+The full project is due Thursday. I've finished most of it, but can you test the code / fill in things
+if I've missed anything?
