@@ -46,16 +46,8 @@ public class InventoryItem {
     {
         quantity += _quantity; 
     }
-    public boolean decreaseQuantityBy(int _quantity)
+    public void decreaseQuantityBy(int _quantity)
     {
-        if(quantity - _quantity >= 0)
-        {
-            quantity -= _quantity; 
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        quantity -= _quantity; 
     }
 }

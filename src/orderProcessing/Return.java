@@ -38,12 +38,12 @@ public class Return extends Transaction{
             }
             else
             {
-                System.out.println("WE DO NOT HAVE ENOUGH CASH TO GIVE YOU");
+                System.out.println("We do not have enough cash to give to you, sorry.");
             }
             
         } else {
             // item does not exist in the inventory
-            System.out.println("WE DO NOT CARRY THIS ITEM");
+            System.out.println("We do not carry this item.");
         }
         
         

@@ -29,11 +29,21 @@ public class Sale extends Transaction{
     {
         Map<String, InventoryItem> items = inventory.getItems();
         InventoryItem item = items.get(itemName);
-        
+                    
         customer.addItemToCart(item, this.quantity);
-        item.decreaseQuantityBy(this.quantity);
         double cashToAddToInventory = item.getCost() * this.quantity;
-        inventory.addCash(cashToAddToInventory);
-        System.out.println("blah");
+
+        if (customer.processPayment(cashToAddToInventory))
+        {
+            item.decreaseQuantityBy(this.quantity);
+            inventory.addCash(cashToAddToInventory);
+        }
+        else 
+        {
+            System.out.println("You do not have enough money. Transaction canceled.");
+        }
+        
+        // Clearly not currently doing much with the users cart.
+        customer.clearCart();
     }
 }

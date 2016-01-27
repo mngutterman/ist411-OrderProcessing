@@ -40,18 +40,17 @@ public class Exchange extends Transaction{
                 }
                 else
                 {
-                    System.out.println("WE DO NOT HAVE ENOUGH IN STOCK");
+                    System.out.println("We do not have this item in stock, sorry.");
                 }
             }
             else
             {
-                System.out.println("WE DO NOT CARRY YOUR ITEM");
+                System.out.println("We do not carry the item you are trying to exchange, sorry");
             }
         } else {
             // item does not exist in the inventory
-            System.out.println("WE DO NOT CARRY THIS ITEM");
+            System.out.println("We do not carry the item you want, sorry");
         }
-        
         
     }
     

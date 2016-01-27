@@ -7,13 +7,16 @@ package orderProcessing;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  *
  * @author mdr5325
  */
 public class Order extends Transaction {
-
+        
+    public static final String YES = "y";
+    
     Inventory inventory = Inventory.getInstance();
     private String itemName;
     private int quantity;
@@ -48,18 +51,33 @@ public class Order extends Transaction {
                 sale.process();
                 
             }
-            else 
+            else if (stockOfItem > 0)
             {
                 // not enough in stock to fullfill order
-                System.out.println("ONLY " + stockOfItem + " LEFT, SORRY");
+  
+                Scanner reader = new Scanner(System.in);  // Reading from System.in
+                System.out.println("There is only " + stockOfItem + " left. Would you like to purchase that amount? (y/n): ");
+                String response = reader.nextLine().toLowerCase();
                 
+                if (response.equals(YES))
+                {
+                    Sale sale = new Sale(0,item.getName(),stockOfItem, customer);
+                    sale.process();
+                }
+                else
+                {
+                    System.out.println("Thanks anyways!");
+                }                
                 
-                
+            } 
+            else
+            {
+                System.out.println("We are currently all out of this item, sorry.");
             }
             
         } else {
             // item does not exist in the inventory
-            System.out.println("WE ARE OUT OF THIS ITEM");
+            System.out.println("We do not carry this item, sorry.");
         }
 
     }

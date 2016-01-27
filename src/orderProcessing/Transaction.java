@@ -22,9 +22,6 @@ public abstract class Transaction {
     {
         return transactionID;
     }
-    
-    //private inventoryItem item;
-    //private int quanity;
 
     public abstract void process();        
 }

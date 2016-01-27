@@ -15,13 +15,15 @@ import java.util.Map;
 public class Customer {
     private int customerID;
     private String customerName;
+    private double cash;
     
     // cart is a dictionary of item : quanity
     private Map<InventoryItem, Integer> cart = new HashMap<InventoryItem, Integer>(); 
 
-    public Customer(int _customerID, String _customerName){
+    public Customer(int _customerID, String _customerName, double _cash){
         customerID = _customerID;
         customerName = _customerName;
+        cash = _cash;
     }
     
     public int getCustomerID()
@@ -54,5 +56,17 @@ public class Customer {
     public void submitTransaction(Transaction transaction)
     {
         transaction.process();
+    }
+    
+    public boolean processPayment(double paymentAmount)
+    {
+        if (paymentAmount <= this.cash){
+            this.cash -= paymentAmount;
+            return true;
+        } 
+        else 
+        {
+            return false;
+        }
     }
 }
