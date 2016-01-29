@@ -30,6 +30,6 @@ public class OrderProcessing {
         //customer1.submitTransaction(exchange);
         
         
-        System.out.println("blah");
+        System.out.println("end");
     }
 }
