@@ -41,8 +41,7 @@ public class Customer {
     public void setCustomerName(String _customerName)
     {
         customerName = _customerName;
-    }
-    
+    }    
     public void addItemToCart(InventoryItem item, Integer quantity)
     {
         cart.put(item, quantity);
