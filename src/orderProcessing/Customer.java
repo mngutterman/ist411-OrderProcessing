@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author Matt
  */
-public class Customer {
+public class Customer implements Runnable{
     private int customerID;
     private String customerName;
     private double cash;
@@ -52,7 +52,7 @@ public class Customer {
         cart.clear();
     }
     
-    public void submitTransaction(Transaction transaction)
+    public synchronized void submitTransaction(Transaction transaction)
     {
         transaction.process();
     }
@@ -67,5 +67,22 @@ public class Customer {
         {
             return false;
         }
+    }
+
+    @Override
+    public void run() {
+        Order order = new Order(0,"pen",2, this);
+        this.submitTransaction(order);
+        
+        
+        
+        //Return ret = new Return(0, "pen", 50000);
+        //customer1.submitTransaction(ret);
+        
+        //InventoryAdjustment adj = new InventoryAdjustment(0, "pen", 2);
+        //customer1.submitTransaction(adj);
+        
+        //Exchange exchange = new Exchange(0, "paper", "pen");
+        //customer1.submitTransaction(exchange);
     }
 }

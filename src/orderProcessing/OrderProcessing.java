@@ -15,19 +15,25 @@ public class OrderProcessing {
      */
     public static void main(String[] args) {
                         
-        Customer customer1 = new Customer(0, "John",0);
+        // README:::
+        // Right now I just have this working with the inventory realizing it has run out of a 
+        // particular item when one user buys all the stock and another user tries to purchase the item
+        //
+        // So really, I have only successfully sychronized order right now.
         
-        Order order = new Order(0,"pen",2, customer1);
-        customer1.submitTransaction(order);
+        Customer customer1 = new Customer(0, "John",10);
+        Customer customer2 = new Customer(1, "Mike",10);
 
-        //Return ret = new Return(0, "pen", 50000);
-        //customer1.submitTransaction(ret);
+        Thread thread_1 = new Thread(customer1);
+        Thread thread_2 = new Thread(customer2);
+
+        thread_1.setName("John's thread");
+        thread_2.setName("Mike's thread");
+
+        thread_1.start();
+        thread_2.start();
+
         
-        //InventoryAdjustment adj = new InventoryAdjustment(0, "pen", 2);
-        //customer1.submitTransaction(adj);
-        
-        //Exchange exchange = new Exchange(0, "paper", "pen");
-        //customer1.submitTransaction(exchange);
         
         
         System.out.println("end");

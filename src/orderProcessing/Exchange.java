@@ -25,6 +25,7 @@ public class Exchange extends Transaction{
     @Override
     public void process()
     {
+        
         Map<String, InventoryItem> items = inventory.getItems();
         
         // If we do not carry the item, cancel the transaction

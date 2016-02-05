@@ -23,7 +23,7 @@ public class InventoryAdjustment extends Transaction{
     }
     
     @Override
-    public void process()
+    public synchronized void process()
     {
         Map<String, InventoryItem> items = inventory.getItems();
         

@@ -24,29 +24,29 @@ public class InventoryItem {
         cost = _cost;
     }
     
-    public double getCost()
+    public synchronized double getCost()
     {
         return cost;
     }
     
-    public String getName()
+    public synchronized String getName()
     {
         return name;
     }
     
-    public int getQuantity()
+    public synchronized int getQuantity()
     {
         return quantity;
     }
-    public void setQuantity(int _quantity)
+    public synchronized void setQuantity(int _quantity)
     {
         quantity = _quantity; 
     }
-    public void increaseQuantityBy(int _quantity)
+    public synchronized void increaseQuantityBy(int _quantity)
     {
         quantity += _quantity; 
     }
-    public void decreaseQuantityBy(int _quantity)
+    public synchronized void decreaseQuantityBy(int _quantity)
     {
         quantity -= _quantity; 
     }

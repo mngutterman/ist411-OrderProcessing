@@ -19,22 +19,22 @@ public class Inventory {
     private Map<String, InventoryItem> items = new HashMap<String, InventoryItem>(); 
     private double cash;
 
-    private/*public*/ Inventory(){
+    private Inventory(){
          populateInventoryWithItems();
          this.cash = 10000;
     }
     
     // factory method
-    public static Inventory getInstance( ) {
+    public synchronized static Inventory getInstance( ) {
       return inventory;
     }
     
-    protected/*public*/ Map<String, InventoryItem> getItems()
+    protected Map<String, InventoryItem> getItems()
     {
         return items;
     }
     
-    protected/*public*/ void addItem(InventoryItem _item)
+    protected synchronized void addItem(InventoryItem _item)
     {
         String itemName = _item.getName();
         int itemQuantity = _item.getQuantity();
@@ -53,12 +53,12 @@ public class Inventory {
         }
     }
     
-    protected void addCash(double cashAmount)
+    protected synchronized void addCash(double cashAmount)
     {
         cash += cashAmount;
     }
     
-    protected boolean removeCash(double cashAmount)
+    protected synchronized boolean removeCash(double cashAmount)
     {
         if (this.cash - cashAmount > 0)
         {
@@ -71,7 +71,7 @@ public class Inventory {
         }
     }
     
-    protected double getCash()
+    protected synchronized double getCash()
     {
         return cash;
     }

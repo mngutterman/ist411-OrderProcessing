@@ -25,7 +25,7 @@ public class Sale extends Transaction{
     }
     
     @Override
-    public void process()
+    public synchronized void process()
     {
         Map<String, InventoryItem> items = inventory.getItems();
         InventoryItem item = items.get(itemName);

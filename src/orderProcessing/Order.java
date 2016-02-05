@@ -37,8 +37,9 @@ public class Order extends Transaction {
     public void process()
     {
         Map<String, InventoryItem> items = inventory.getItems();
-        
         InventoryItem item = items.get(itemName);
+        
+        synchronized(item){
         if (item != null) {
             // item exists in the inventory
             int stockOfItem = item.getQuantity();
@@ -54,7 +55,6 @@ public class Order extends Transaction {
             else if (stockOfItem > 0)
             {
                 // not enough in stock to fullfill order
-  
                 Scanner reader = new Scanner(System.in);  // Reading from System.in
                 System.out.println("There is only " + stockOfItem + " left. Would you like to purchase that amount? (y/n): ");
                 String response = reader.nextLine().toLowerCase();
@@ -79,6 +79,6 @@ public class Order extends Transaction {
             // item does not exist in the inventory
             System.out.println("We do not carry this item, sorry.");
         }
-
+        }
     }
 }
