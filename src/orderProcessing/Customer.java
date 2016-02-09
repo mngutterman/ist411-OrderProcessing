@@ -17,6 +17,9 @@ public class Customer implements Runnable{
     private String customerName;
     private double cash;
     
+    // set this so different customers run() methods can have different behavior
+    private Transaction transaction;
+    
     // cart is a dictionary of item : quanity
     private Map<InventoryItem, Integer> cart = new HashMap<InventoryItem, Integer>(); 
 
@@ -42,6 +45,17 @@ public class Customer implements Runnable{
     {
         customerName = _customerName;
     }    
+    
+    public Transaction getTransaction()
+    {
+        return this.transaction;
+    }
+    
+    public void setTransaction(Transaction _transaction)
+    {
+        this.transaction = _transaction;
+    }
+    
     public void addItemToCart(InventoryItem item, Integer quantity)
     {
         cart.put(item, quantity);
@@ -57,7 +71,7 @@ public class Customer implements Runnable{
         transaction.process();
     }
     
-    public boolean processPayment(double paymentAmount)
+    public synchronized boolean processPayment(double paymentAmount)
     {
         if (paymentAmount <= this.cash){
             this.cash -= paymentAmount;
@@ -71,10 +85,8 @@ public class Customer implements Runnable{
 
     @Override
     public void run() {
-        Order order = new Order(0,"pen",2, this);
-        this.submitTransaction(order);
         
-        
+        this.submitTransaction(this.transaction);
         
         //Return ret = new Return(0, "pen", 50000);
         //customer1.submitTransaction(ret);

@@ -40,45 +40,45 @@ public class Order extends Transaction {
         InventoryItem item = items.get(itemName);
         
         synchronized(item){
-        if (item != null) {
-            // item exists in the inventory
-            int stockOfItem = item.getQuantity();
-            
-            if (stockOfItem >= this.quantity)
-            {
-                // create a sale
-                System.out.println("SALE");
-                Sale sale = new Sale(0,item.getName(),quantity, customer);
-                sale.process();
-                
-            }
-            else if (stockOfItem > 0)
-            {
-                // not enough in stock to fullfill order
-                Scanner reader = new Scanner(System.in);  // Reading from System.in
-                System.out.println("There is only " + stockOfItem + " left. Would you like to purchase that amount? (y/n): ");
-                String response = reader.nextLine().toLowerCase();
-                
-                if (response.equals(YES))
+            if (item != null) {
+                // item exists in the inventory
+                int stockOfItem = item.getQuantity();
+
+                if (stockOfItem >= this.quantity)
                 {
-                    Sale sale = new Sale(0,item.getName(),stockOfItem, customer);
+                    // create a sale
+                    System.out.println("initiating sale of " + itemName);
+                    Sale sale = new Sale(0,item.getName(),quantity, customer);
                     sale.process();
                 }
+                else if (stockOfItem > 0)
+                {
+                    // not enough in stock to fullfill order
+                    Scanner reader = new Scanner(System.in);  // Reading from System.in
+                    System.out.println("There is only " + stockOfItem + " " + itemName + "(s) left. Would you like to purchase that amount? (y/n): ");
+                    String response = reader.nextLine().toLowerCase();
+
+                    if (response.equals(YES))
+                    {
+                        System.out.println("initiating sale of " + itemName);
+                        Sale sale = new Sale(0,item.getName(),stockOfItem, customer);
+                        sale.process();
+                    }
+                    else
+                    {
+                        System.out.println("Thanks anyways!");
+                    }                
+
+                } 
                 else
                 {
-                    System.out.println("Thanks anyways!");
-                }                
-                
-            } 
-            else
-            {
-                System.out.println("We are currently all out of this item, sorry.");
+                    System.out.println("We are currently all out of this item, sorry.");
+                }
+
+            } else {
+                // item does not exist in the inventory
+                System.out.println("We do not carry this item, sorry.");
             }
-            
-        } else {
-            // item does not exist in the inventory
-            System.out.println("We do not carry this item, sorry.");
-        }
         }
     }
 }
