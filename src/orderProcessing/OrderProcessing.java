@@ -24,11 +24,14 @@ public class OrderProcessing {
         Customer customer1 = new Customer(0, "John",10);
         Customer customer2 = new Customer(1, "Mike",10);
         
-        Order order1 = new Order(0,"pen",2, customer1);
-        Order order2 = new Order(0,"paper",1, customer2);
+        //Order transaction1 = new Order(0,"pen",2, customer1);
+        //Order transaction2 = new Order(0,"paper",1, customer2);
         
-        customer1.setTransaction(order1);
-        customer2.setTransaction(order2);
+        Return transaction1 = new Return(0,"pen",2);
+        Return transaction2 = new Return(0,"pen",1);
+   
+        customer1.setTransaction(transaction1);
+        customer2.setTransaction(transaction2);
         
         Thread thread_1 = new Thread(customer1);
         Thread thread_2 = new Thread(customer2);

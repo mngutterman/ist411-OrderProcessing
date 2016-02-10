@@ -26,28 +26,30 @@ public class InventoryItem {
     
     public synchronized double getCost()
     {
-        return cost;
+        return this.cost;
     }
     
     public synchronized String getName()
     {
-        return name;
+        return this.name;
     }
     
     public synchronized int getQuantity()
     {
-        return quantity;
+        return this.quantity;
     }
     public synchronized void setQuantity(int _quantity)
     {
-        quantity = _quantity; 
+        this.quantity = _quantity; 
     }
     public synchronized void increaseQuantityBy(int _quantity)
     {
-        quantity += _quantity; 
+        System.out.println("adding " + _quantity + " to " + this.name + " quantity");
+        this.quantity += _quantity; 
+        
     }
     public synchronized void decreaseQuantityBy(int _quantity)
     {
-        quantity -= _quantity; 
+        this.quantity -= _quantity; 
     }
 }

@@ -5,7 +5,6 @@
  */
 package orderProcessing;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -39,8 +38,11 @@ public class Order extends Transaction {
         Map<String, InventoryItem> items = inventory.getItems();
         InventoryItem item = items.get(itemName);
         
-        synchronized(item){
-            if (item != null) {
+        if (item != null) {
+            // this must be synchronized because if a different customer buys this item mid order,
+            // you will still assume the item has it's original quantity
+            synchronized(item){
+
                 // item exists in the inventory
                 int stockOfItem = item.getQuantity();
 
@@ -75,10 +77,12 @@ public class Order extends Transaction {
                     System.out.println("We are currently all out of this item, sorry.");
                 }
 
-            } else {
+            } 
+        }
+        else 
+        {
                 // item does not exist in the inventory
                 System.out.println("We do not carry this item, sorry.");
-            }
         }
     }
 }

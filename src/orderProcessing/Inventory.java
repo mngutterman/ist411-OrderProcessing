@@ -53,16 +53,21 @@ public class Inventory {
         }
     }
     
+    // these methods seem to be thread safe
     protected synchronized void addCash(double cashAmount)
     {
+        System.out.println("adding $" + cashAmount + " to inventory cash");
         cash += cashAmount;
+        System.out.println("inventory cash total now:    $" + cash);
     }
     
     protected synchronized boolean removeCash(double cashAmount)
     {
+        System.out.println("removing $" + cashAmount + " from inventory cash");
         if (this.cash - cashAmount > 0)
         {
             cash -= cashAmount;
+            System.out.println("inventory cash total now:    $" + cash);
             return true;
         }
         else 
@@ -80,7 +85,7 @@ public class Inventory {
     private void populateInventoryWithItems()
     {
         InventoryItem item1 = new InventoryItem("pen",2, .50);
-        InventoryItem item2 = new InventoryItem("paper",1, 1.0);
+        InventoryItem item2 = new InventoryItem("paper",1, 3.0);
         
         this.items.put(item1.getName(), item1);
         this.items.put(item2.getName(), item2);

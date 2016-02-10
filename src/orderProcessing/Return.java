@@ -31,14 +31,21 @@ public class Return extends Transaction{
         InventoryItem item = items.get(itemName);
         if (item != null) {
             double cashToReturnToCustomer = item.getCost() * this.quantity;
-            if (cashToReturnToCustomer < inventory.getCash())
-            {
-                inventory.removeCash(cashToReturnToCustomer);
-                item.increaseQuantityBy(this.quantity);
-            }
-            else
-            {
-                System.out.println("We do not have enough cash to give to you, sorry.");
+            
+            // this must be synchronized on the inventory incase the inventory's cash
+            // dips below what you need after you check it in the if statement.
+            
+            // SEEMS THREAD SAFE
+            synchronized(inventory){
+                if (cashToReturnToCustomer < inventory.getCash())
+                {
+                    inventory.removeCash(cashToReturnToCustomer);
+                    item.increaseQuantityBy(this.quantity);
+                }
+                else
+                {
+                    System.out.println("We do not have enough cash to give to you, sorry.");
+                }
             }
             
         } else {
