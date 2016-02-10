@@ -36,8 +36,8 @@ public class OrderProcessing {
         Thread thread_1 = new Thread(customer1);
         Thread thread_2 = new Thread(customer2);
 
-        thread_1.setName("John's thread");
-        thread_2.setName("Mike's thread");
+        thread_1.setName("Thread 1");
+        thread_2.setName("Thread 2");
 
         thread_1.start();
         thread_2.start();
