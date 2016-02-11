@@ -36,10 +36,17 @@ public class Return extends Transaction{
             // dips below what you need after you check it in the if statement.
             
             // SEEMS THREAD SAFE
-            synchronized(inventory){
-                if (cashToReturnToCustomer < inventory.getCash())
+            synchronized(inventory.getBankAccount()){
+                try {
+                    System.out.println("SLEEP");
+                    Thread.sleep(2000);                 //1000 milliseconds is one second.
+                } catch(InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
+                if (cashToReturnToCustomer < inventory.getCashFromBankAccount()/*inventory.getCash()*/)
                 {
-                    inventory.removeCash(cashToReturnToCustomer);
+                    inventory.removeMoneyFromBankAccount(cashToReturnToCustomer);
+                    //inventory.removeCash(cashToReturnToCustomer);
                     item.increaseQuantityBy(this.quantity);
                 }
                 else

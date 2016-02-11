@@ -36,7 +36,8 @@ public class Sale extends Transaction{
         if (customer.processPayment(cashToAddToInventory))
         {
             item.decreaseQuantityBy(this.quantity);
-            inventory.addCash(cashToAddToInventory);
+            inventory.addMoneyToBankAccount(cashToAddToInventory);
+            //inventory.addCash(cashToAddToInventory);
             System.out.println("Sale complete.   item: " +item.getName()+ " quantity: " + this.quantity);
 
         }

@@ -25,10 +25,10 @@ public class OrderProcessing {
         Customer customer2 = new Customer(1, "Mike",10);
         
         //Order transaction1 = new Order(0,"pen",2, customer1);
-        //Order transaction2 = new Order(0,"paper",1, customer2);
+        Order transaction2 = new Order(0,"paper",1, customer2);
         
         Return transaction1 = new Return(0,"pen",2);
-        Return transaction2 = new Return(0,"pen",1);
+        //Return transaction2 = new Return(0,"pen",1);
    
         customer1.setTransaction(transaction1);
         customer2.setTransaction(transaction2);

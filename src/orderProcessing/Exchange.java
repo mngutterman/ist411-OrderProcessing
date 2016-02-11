@@ -34,16 +34,14 @@ public class Exchange extends Transaction{
             InventoryItem customerItem = items.get(customerItemName);
             if (customerItem != null)
             {
-                synchronized(inventory){
-                    if (inventoryItem.getQuantity() > 0)
-                    {
-                        inventoryItem.decreaseQuantityBy(1);
-                        customerItem.increaseQuantityBy(1);                    
-                    }
-                    else
-                    {
-                        System.out.println("We do not have this item in stock, sorry.");
-                    }
+                if (inventoryItem.getQuantity() > 0)
+                {
+                    inventoryItem.decreaseQuantityBy(1);
+                    customerItem.increaseQuantityBy(1);                    
+                }
+                else
+                {
+                    System.out.println("We do not have this item in stock, sorry.");
                 }
             }
             else
