@@ -37,12 +37,12 @@ public class Return extends Transaction{
             
             // SEEMS THREAD SAFE
             synchronized(inventory.getBankAccount()){
-                try {
+                /*try {
                     System.out.println("SLEEP");
                     Thread.sleep(2000);                 //1000 milliseconds is one second.
                 } catch(InterruptedException ex) {
                     Thread.currentThread().interrupt();
-                }
+                }*/
                 if (cashToReturnToCustomer < inventory.getCashFromBankAccount()/*inventory.getCash()*/)
                 {
                     inventory.removeMoneyFromBankAccount(cashToReturnToCustomer);
