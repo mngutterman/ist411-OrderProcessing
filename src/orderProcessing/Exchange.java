@@ -13,8 +13,8 @@ import java.util.Map;
  */
 public class Exchange extends Transaction{
     Inventory inventory = Inventory.getInstance();
-    private String customerItemName;
-    private String inventoryItemName;
+    private String customerItemName;   // What they have
+    private String inventoryItemName;  // What they want
     
     public Exchange(int id, String _customerItemName, String _inventoryItemName) {
         super(id);
@@ -34,14 +34,16 @@ public class Exchange extends Transaction{
             InventoryItem customerItem = items.get(customerItemName);
             if (customerItem != null)
             {
-                if (inventoryItem.getQuantity() > 0)
-                {
-                    inventoryItem.decreaseQuantityBy(1);
-                    customerItem.increaseQuantityBy(1);                    
-                }
-                else
-                {
-                    System.out.println("We do not have this item in stock, sorry.");
+                synchronized(inventory){
+                    if (inventoryItem.getQuantity() > 0)
+                    {
+                        inventoryItem.decreaseQuantityBy(1);
+                        customerItem.increaseQuantityBy(1);                    
+                    }
+                    else
+                    {
+                        System.out.println("We do not have this item in stock, sorry.");
+                    }
                 }
             }
             else
