@@ -18,14 +18,14 @@ public class BankAccount {
     }
     
     // these methods seem to be thread safe
-    protected synchronized void addCash(double cashAmount)
+    public synchronized void addCash(double cashAmount)
     {
         System.out.println("adding $" + cashAmount + " to inventory cash");
         this.cash += cashAmount;
         System.out.println("inventory cash total now:    $" + cash);
     }
     
-    protected synchronized boolean removeCash(double cashAmount)
+    public synchronized boolean removeCash(double cashAmount)
     {
         System.out.println("removing $" + cashAmount + " from inventory cash");
         if (this.cash - cashAmount > 0)
@@ -40,7 +40,7 @@ public class BankAccount {
         }
     }
     
-    protected synchronized double getCash()
+    public synchronized double getCash()
     {
         return this.cash;
     }

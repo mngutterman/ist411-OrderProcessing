@@ -17,11 +17,13 @@ public class Inventory {
     private static Inventory inventory = new Inventory( );
     
     private Map<String, InventoryItem> items = new HashMap<String, InventoryItem>(); 
-    private double cash;
-
+    //private double cash;
+    private BankAccount bankAccount;
+    
     private Inventory(){
          populateInventoryWithItems();
-         this.cash = 10000;
+         this.bankAccount = new BankAccount(1000);
+         //this.cash = 10000;
     }
     
     // factory method
@@ -53,34 +55,25 @@ public class Inventory {
         }
     }
     
-    // these methods seem to be thread safe
-    protected synchronized void addCash(double cashAmount)
+    protected synchronized BankAccount getBankAccount()
     {
-        System.out.println("adding $" + cashAmount + " to inventory cash");
-        cash += cashAmount;
-        System.out.println("inventory cash total now:    $" + cash);
+        return this.bankAccount;
     }
     
-    protected synchronized boolean removeCash(double cashAmount)
+    protected synchronized void addMoneyToBankAccount(double cash)
     {
-        System.out.println("removing $" + cashAmount + " from inventory cash");
-        if (this.cash - cashAmount > 0)
-        {
-            cash -= cashAmount;
-            System.out.println("inventory cash total now:    $" + cash);
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        this.bankAccount.addCash(cash);
     }
     
-    protected synchronized double getCash()
+    protected synchronized void removeMoneyFromBankAccount(double cash)
     {
-        return cash;
+        this.bankAccount.removeCash(cash);
     }
     
+    protected synchronized double getCashFromBankAccount()
+    {
+        return this.bankAccount.getCash();
+    }
     
     private void populateInventoryWithItems()
     {
