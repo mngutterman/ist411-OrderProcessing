@@ -54,7 +54,8 @@ public class InventoryItem {
     {
         System.out.println("adding " + _quantity + " to " + this.name + " quantity");
         this.quantity += _quantity; 
-        
+        System.out.println(this.name + " quantity now:" + this.quantity);
+
     }
     public synchronized void decreaseQuantityBy(int _quantity)
     {

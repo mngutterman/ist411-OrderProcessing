@@ -30,16 +30,17 @@ public class InventoryAdjustment extends Transaction{
         // If we do not carry the item, cancel the transaction
         InventoryItem item = items.get(itemName);
         if (item != null) {
-            
-            if (item.getQuantity() + quantity >= 0)
+            synchronized(item)
             {
-                item.increaseQuantityBy(this.quantity);
+                if (item.getQuantity() + quantity >= 0)
+                {
+                    item.increaseQuantityBy(this.quantity);
+                }
+                else
+                {
+                    System.out.println("WE CANNOT ADJUST THIS QUANTITY OF INVENTORY");
+                }
             }
-            else
-            {
-                System.out.println("WE CANNOT ADJUST THIS QUANTITY OF INVENTORY");
-            }
-            
         } else {
             // item does not exist in the inventory
             System.out.println("WE DO NOT CARRY THIS ITEM");

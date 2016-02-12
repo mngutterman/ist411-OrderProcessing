@@ -30,8 +30,11 @@ public class OrderProcessing {
         //Return transaction1 = new Return(0,"pen",2);
         //Return transaction2 = new Return(0,"pen",1);
    
-        Exchange transaction1 = new Exchange(0,"pen", "paper");
-        Exchange transaction2 = new Exchange(1,"paper", "pen");
+        //Exchange transaction1 = new Exchange(0,"pen", "paper");
+        //Exchange transaction2 = new Exchange(1,"paper", "pen");
+        
+        InventoryAdjustment transaction1 = new InventoryAdjustment(0,"pen", 1);
+        InventoryAdjustment transaction2 = new InventoryAdjustment(1,"pen", -1);
         
         customer1.setTransaction(transaction1);
         customer2.setTransaction(transaction2);
