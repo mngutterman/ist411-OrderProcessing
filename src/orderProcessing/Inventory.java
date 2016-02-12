@@ -38,6 +38,7 @@ public class Inventory {
     
     protected synchronized void addItem(InventoryItem _item)
     {
+        int itemId = _item.getId();
         String itemName = _item.getName();
         int itemQuantity = _item.getQuantity();
         double itemCost = _item.getCost();
@@ -50,7 +51,7 @@ public class Inventory {
         // item has not been created in our hashMap. create it and set its quantity / cost
         else 
         {
-            item = new InventoryItem(itemName, itemQuantity, itemCost);
+            item = new InventoryItem(itemId, itemName, itemQuantity, itemCost);
             items.put(itemName,item);
         }
     }
@@ -77,8 +78,8 @@ public class Inventory {
     
     private void populateInventoryWithItems()
     {
-        InventoryItem item1 = new InventoryItem("pen",2, .50);
-        InventoryItem item2 = new InventoryItem("paper",1, 3.0);
+        InventoryItem item1 = new InventoryItem(0, "pen",2, .50);
+        InventoryItem item2 = new InventoryItem(1, "paper",1, 3.0);
         
         this.items.put(item1.getName(), item1);
         this.items.put(item2.getName(), item2);

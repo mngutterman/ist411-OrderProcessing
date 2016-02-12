@@ -30,19 +30,51 @@ public class Exchange extends Transaction{
         
         // If we do not carry the item, cancel the transaction
         InventoryItem inventoryItem = items.get(inventoryItemName);
+        
+        
         if (inventoryItem != null) {
             InventoryItem customerItem = items.get(customerItemName);
             if (customerItem != null)
             {
-                if (inventoryItem.getQuantity() > 0)
+                InventoryItem firstItem;
+                InventoryItem secondItem;
+                
+                // set an order based on id to avoid deadlock
+                if (inventoryItem.getId() == Math.min(inventoryItem.getId(), customerItem.getId())) 
                 {
-                    inventoryItem.decreaseQuantityBy(1);
-                    customerItem.increaseQuantityBy(1);                    
+                    firstItem = inventoryItem;
+                    secondItem = customerItem;
                 }
                 else
                 {
-                    System.out.println("We do not have this item in stock, sorry.");
+                    firstItem = customerItem;
+                    secondItem = inventoryItem;
                 }
+                
+                synchronized(firstItem)
+                {
+                    try {
+                        System.out.println("SLEEP");
+                        Thread.sleep(2000);                 //1000 milliseconds is one second.
+                    } catch(InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+                    synchronized(secondItem)
+                    {
+                        System.out.println("WE DIDNT DEADLOCK");
+                        if (inventoryItem.getQuantity() > 0)
+                        {
+                            inventoryItem.decreaseQuantityBy(1);
+                            customerItem.increaseQuantityBy(1);                    
+                        }
+                        else
+                        {
+                            System.out.println("We do not have this item in stock, sorry.");
+                        }
+                    }
+                }
+
+                
             }
             else
             {

@@ -10,6 +10,8 @@ package orderProcessing;
  * @author Matt
  */
 public class InventoryItem {
+    
+    private int id;
     private String name;
     private int quantity;
     private double cost;
@@ -17,11 +19,17 @@ public class InventoryItem {
     public InventoryItem()
     {
     }
-    public InventoryItem(String _name, int _quantity, double _cost)
+    public InventoryItem(int _id, String _name, int _quantity, double _cost)
     {
+        id = _id;
         name = _name;
         quantity = _quantity;
         cost = _cost;
+    }
+    
+    public int getId()
+    {
+        return this.id;
     }
     
     public synchronized double getCost()
