@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author Matt
  */
-public class Customer implements Runnable{
+public class Customer{
     private int customerID;
     private String customerName;
     private double cash;
@@ -83,18 +83,18 @@ public class Customer implements Runnable{
         }
     }
 
-    @Override
-    public void run() {
-        
-        this.submitTransaction(this.transaction);
-        
-        //Return ret = new Return(0, "pen", 50000);
-        //customer1.submitTransaction(ret);
-        
-        //InventoryAdjustment adj = new InventoryAdjustment(0, "pen", 2);
-        //customer1.submitTransaction(adj);
-        
-        //Exchange exchange = new Exchange(0, "paper", "pen");
-        //customer1.submitTransaction(exchange);
-    }
+//    @Override
+//    public void run() {
+//        
+//        this.submitTransaction(this.transaction);
+//        
+//        //Return ret = new Return(0, "pen", 50000);
+//        //customer1.submitTransaction(ret);
+//        
+//        //InventoryAdjustment adj = new InventoryAdjustment(0, "pen", 2);
+//        //customer1.submitTransaction(adj);
+//        
+//        //Exchange exchange = new Exchange(0, "paper", "pen");
+//        //customer1.submitTransaction(exchange);
+//    }
 }

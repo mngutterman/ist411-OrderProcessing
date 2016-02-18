@@ -49,4 +49,9 @@ public class Sale extends Transaction{
         // Clearly not currently doing much with the users cart.
         customer.clearCart();
     }
+    
+    @Override
+    public void run() {
+        this.process();
+    }
 }

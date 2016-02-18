@@ -85,4 +85,9 @@ public class Order extends Transaction {
                 System.out.println("We do not carry this item, sorry.");
         }
     }
+    
+    @Override
+    public void run() {
+        this.process();
+    }
 }

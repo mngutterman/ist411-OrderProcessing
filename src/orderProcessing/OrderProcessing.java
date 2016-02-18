@@ -24,23 +24,23 @@ public class OrderProcessing {
         Customer customer1 = new Customer(0, "John",10);
         Customer customer2 = new Customer(1, "Mike",10);
         
-        //Order transaction1 = new Order(0,"pen",2, customer1);
-        //Order transaction2 = new Order(0,"paper",1, customer2);
+        Order transaction1 = new Order(0,"pen",2, customer1);
+        Order transaction2 = new Order(0,"paper",1, customer2);
         
-        //Return transaction1 = new Return(0,"pen",2);
-        //Return transaction2 = new Return(0,"pen",1);
+//        Return transaction1 = new Return(0,"pen",2);
+//        Return transaction2 = new Return(0,"pen",1);
    
-        //Exchange transaction1 = new Exchange(0,"pen", "paper");
-        //Exchange transaction2 = new Exchange(1,"paper", "pen");
+//        Exchange transaction1 = new Exchange(0,"pen", "paper");
+//        Exchange transaction2 = new Exchange(1,"paper", "pen");
         
-        InventoryAdjustment transaction1 = new InventoryAdjustment(0,"pen", 1);
-        InventoryAdjustment transaction2 = new InventoryAdjustment(1,"pen", -1);
-        
+//        InventoryAdjustment transaction1 = new InventoryAdjustment(0,"pen", 1);
+//        InventoryAdjustment transaction2 = new InventoryAdjustment(1,"pen", -1);
+
         customer1.setTransaction(transaction1);
         customer2.setTransaction(transaction2);
         
-        Thread thread_1 = new Thread(customer1);
-        Thread thread_2 = new Thread(customer2);
+        Thread thread_1 = new Thread(transaction1);
+        Thread thread_2 = new Thread(transaction2);
 
         thread_1.setName("Thread 1");
         thread_2.setName("Thread 2");
@@ -50,5 +50,13 @@ public class OrderProcessing {
 
         
         System.out.println("end");
+    }
+    public void generateTransactions(int _numTransactions)
+    {
+        for(int x = 0; x<_numTransactions; x++)
+        {
+            Customer[] customer = new Customer[10];
+            
+        }
     }
 }

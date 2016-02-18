@@ -58,4 +58,9 @@ public class Return extends Transaction{
         
     }
     
+    @Override
+    public void run() {
+        this.process();
+    }
+    
 }

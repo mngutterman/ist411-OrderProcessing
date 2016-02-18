@@ -49,4 +49,9 @@ public class InventoryAdjustment extends Transaction{
         
     }
     
+    @Override
+    public void run() {
+        this.process();
+    }
+    
 }

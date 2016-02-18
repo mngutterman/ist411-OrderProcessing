@@ -9,7 +9,7 @@ package orderProcessing;
  *
  * @author Matt
  */
-public abstract class Transaction {
+public abstract class Transaction implements Runnable {
     
     int transactionID;
     

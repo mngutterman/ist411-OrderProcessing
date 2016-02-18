@@ -81,4 +81,9 @@ public class Exchange extends Transaction{
         
     }
     
+    @Override
+    public void run() {
+        this.process();
+    }
+    
 }
