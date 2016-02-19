@@ -33,6 +33,8 @@ public class Sale extends Transaction{
         customer.addItemToCart(item, this.quantity);
         double cashToAddToInventory = item.getCost() * this.quantity;
 
+        //synchronized(inventory.getBankAccount()){
+
         if (customer.processPayment(cashToAddToInventory))
         {
             item.decreaseQuantityBy(this.quantity);
@@ -45,6 +47,7 @@ public class Sale extends Transaction{
         {
             System.out.println("You do not have enough money. Transaction canceled.");
         }
+        //}
         
         // Clearly not currently doing much with the users cart.
         customer.clearCart();

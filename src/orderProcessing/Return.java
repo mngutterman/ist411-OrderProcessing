@@ -36,20 +36,21 @@ public class Return extends Transaction{
             // dips below what you need after you check it in the if statement.
             
             // SEEMS THREAD SAFE
-            synchronized(inventory.getBankAccount()){
-                
-                if (cashToReturnToCustomer < inventory.getCashFromBankAccount()/*inventory.getCash()*/)
-                {
-                    inventory.removeMoneyFromBankAccount(cashToReturnToCustomer);
-                    //inventory.removeCash(cashToReturnToCustomer);
-                    item.increaseQuantityBy(this.quantity);
-                }
-                else
-                {
-                    System.out.println("We do not have enough cash to give to you, sorry.");
+            synchronized(item){
+                synchronized(inventory.getBankAccount()){
+
+                    if (cashToReturnToCustomer < inventory.getCashFromBankAccount()/*inventory.getCash()*/)
+                    {
+                        inventory.removeMoneyFromBankAccount(cashToReturnToCustomer);
+                        //inventory.removeCash(cashToReturnToCustomer);
+                        item.increaseQuantityBy(this.quantity);
+                    }
+                    else
+                    {
+                        System.out.println("We do not have enough cash to give to you, sorry.");
+                    }
                 }
             }
-            
         } else {
             // item does not exist in the inventory
             System.out.println("We do not carry this item.");

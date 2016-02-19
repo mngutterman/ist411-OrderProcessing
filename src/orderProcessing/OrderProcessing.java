@@ -79,14 +79,14 @@ public class OrderProcessing {
 
         for(int x = 0; x< NUM_TRANSACTIONS; x++)
         {
-            int transactionType = rand.nextInt(4) + 1;
+            int transactionType = rand.nextInt(4/*4*/) + 1;
             Transaction transaction = null;
             
             switch (transactionType)
             {
                 case EXCHANGE:
                     transaction = new Exchange(0,"pen", "paper");
-                    //break;
+                    break;
                 case INVENTORY_ADJUSTMENT:
                     transaction = new InventoryAdjustment(0,"pen", 1);
                     break;
