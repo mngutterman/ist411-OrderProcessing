@@ -4,12 +4,26 @@
  * and open the template in the editor.
  */
 package orderProcessing;
+
+import java.util.Random;
+
+
 /**
  *
  * @author Matt
  */
 public class OrderProcessing {
 
+    public static final int NUM_TRANSACTIONS = 10;
+    
+    public static final int EXCHANGE = 1;
+    public static final int INVENTORY_ADJUSTMENT = 2;
+    public static final int ORDER = 3;
+    public static final int RETURN = 4;
+
+    public static Thread[] transactions = new Thread[10];
+
+    
     /**
      * @param args the command line arguments
      */
@@ -21,7 +35,7 @@ public class OrderProcessing {
         //
         // So really, I have only successfully sychronized order right now.
         
-        Customer customer1 = new Customer(0, "John",10);
+        /*Customer customer1 = new Customer(0, "John",10);
         Customer customer2 = new Customer(1, "Mike",10);
         
         Order transaction1 = new Order(0,"pen",2, customer1);
@@ -49,14 +63,57 @@ public class OrderProcessing {
         thread_2.start();
 
         
-        System.out.println("end");
+        System.out.println("end");*/
+        generateTransactions();
+        runTransactions();
+        
     }
-    public void generateTransactions(int _numTransactions)
+    
+    public static void generateTransactions()
     {
-        for(int x = 0; x<_numTransactions; x++)
+        Random rand = new Random();
+        
+        Customer customer = new Customer(0,"Mike",100.0);
+        
+        //Thread[] transactions = new Thread[10];
+
+        for(int x = 0; x< NUM_TRANSACTIONS; x++)
         {
-            Customer[] customer = new Customer[10];
+            int transactionType = rand.nextInt(4) + 1;
+            Transaction transaction = null;
             
+            switch (transactionType)
+            {
+                case EXCHANGE:
+                    transaction = new Exchange(0,"pen", "paper");
+                    //break;
+                case INVENTORY_ADJUSTMENT:
+                    transaction = new InventoryAdjustment(0,"pen", 1);
+                    break;
+                case ORDER:
+                    transaction = new Order(0,"pen",2, customer);
+                    break; 
+                case RETURN:
+                    transaction = new Return(0,"pen",2);
+                    break; 
+                default:
+                    System.out.println("UNKONWN TRANSACTION TYPE");
+                    break;
+            }     
+            transactions[x] = new Thread(transaction);
         }
+        System.out.println("blah");
     }
+    
+    
+    public static void runTransactions()
+    {
+        for(int x = 0; x< NUM_TRANSACTIONS; x++)
+        {
+            transactions[x].start();
+        }
+
+    }
+    
+    
 }
