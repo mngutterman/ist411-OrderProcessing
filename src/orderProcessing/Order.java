@@ -6,7 +6,9 @@
 package orderProcessing;
 
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
+import static orderProcessing.OrderProcessing.NUM_TRANSACTION_TYPES;
 
 /**
  *
@@ -14,7 +16,7 @@ import java.util.Scanner;
  */
 public class Order extends Transaction {
         
-    public static final String YES = "y";
+    public static final int YES = 1;
     
     Inventory inventory = Inventory.getInstance();
     private String itemName;
@@ -56,11 +58,17 @@ public class Order extends Transaction {
                 else if (stockOfItem > 0)
                 {
                     // not enough in stock to fullfill order
-                    Scanner reader = new Scanner(System.in);  // Reading from System.in
+                    /*Scanner reader = new Scanner(System.in);  // Reading from System.in
                     System.out.println("There is only " + stockOfItem + " " + itemName + "(s) left. Would you like to purchase that amount? (y/n): ");
                     String response = reader.nextLine().toLowerCase();
+                     */
+                    
+                    Random rand = new Random();
+                    int randomNumber = rand.nextInt(2) + 1;
 
-                    if (response.equals(YES))
+                    boolean customerWantsRemainingInventory = randomNumber == YES;
+
+                    if (customerWantsRemainingInventory/*response.equals(YES)*/)
                     {
                         System.out.println("initiating sale of " + itemName);
                         Sale sale = new Sale(0,item.getName(),stockOfItem, customer);

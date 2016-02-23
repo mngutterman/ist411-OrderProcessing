@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class OrderProcessing {
 
-    public static final int NUM_TRANSACTIONS = 10;
+    public static final int NUM_TRANSACTIONS = 50000;
     public static final int NUM_TRANSACTION_TYPES = 4;
     
     public static final int EXCHANGE = 1;
@@ -22,12 +22,14 @@ public class OrderProcessing {
     public static final int ORDER = 3;
     public static final int RETURN = 4;
 
-    public static Thread[] transactions = new Thread[10];
+    public static Thread[] transactions = new Thread[NUM_TRANSACTIONS];
 
     
     /**
      * @param args the command line arguments
      */
+             
+             
     public static void main(String[] args) {
         generateTransactions();
         runTransactions();
