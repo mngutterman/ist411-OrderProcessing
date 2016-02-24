@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class OrderProcessing {
 
-    public static final int NUM_TRANSACTIONS = 50000;
+    public static final int NUM_TRANSACTIONS = 1;
     public static final int NUM_TRANSACTION_TYPES = 4;
     
     public static final int EXCHANGE = 1;
@@ -23,7 +23,7 @@ public class OrderProcessing {
     public static final int RETURN = 4;
 
     public static Thread[] transactions = new Thread[NUM_TRANSACTIONS];
-
+    
     
     /**
      * @param args the command line arguments
@@ -40,7 +40,7 @@ public class OrderProcessing {
         Random rand = new Random();
         
         Customer customer = new Customer(0,"Mike",100.0);
-        
+                
         for(int x = 0; x< NUM_TRANSACTIONS; x++)
         {
             int transactionType = rand.nextInt(NUM_TRANSACTION_TYPES) + 1;
@@ -49,16 +49,16 @@ public class OrderProcessing {
             switch (transactionType)
             {
                 case EXCHANGE:
-                    transaction = new Exchange(0,"pen", "paper");
+                    transaction = new Exchange(x,"pen", "paper");
                     break;
                 case INVENTORY_ADJUSTMENT:
-                    transaction = new InventoryAdjustment(0,"pen", 1);
+                    transaction = new InventoryAdjustment(x,"pen", 1);
                     break;
                 case ORDER:
-                    transaction = new Order(0,"pen",2, customer);
+                    transaction = new Order(x,"pen",2, customer);
                     break; 
                 case RETURN:
-                    transaction = new Return(0,"pen",2);
+                    transaction = new Return(x,"pen",2);
                     break; 
                 default:
                     System.out.println("UNKONWN TRANSACTION TYPE");

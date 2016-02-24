@@ -27,6 +27,8 @@ public class Sale extends Transaction{
     @Override
     public synchronized void process()
     {
+        System.out.println("TRANSACTION " + this.getTransactionID() + " - SALE - Start Transaction");
+
         Map<String, InventoryItem> items = inventory.getItems();
         InventoryItem item = items.get(itemName);
                     
@@ -40,17 +42,20 @@ public class Sale extends Transaction{
             item.decreaseQuantityBy(this.quantity);
             inventory.addMoneyToBankAccount(cashToAddToInventory);
             //inventory.addCash(cashToAddToInventory);
-            System.out.println("Sale complete.   item: " +item.getName()+ " quantity: " + this.quantity);
-
+            
+            System.out.println("TRANSACTION " + this.getTransactionID() + " - SALE - Decreased " + item.getName() + " Quantity By " + this.quantity);
+            System.out.println("TRANSACTION " + this.getTransactionID() + " - SALE - Added " + cashToAddToInventory + " to Bank Account");             
         }
         else 
         {
-            System.out.println("You do not have enough money. Transaction canceled.");
+            System.out.println("TRANSACTION " + this.getTransactionID() + " - SALE - Not Enough Money In Bank Account. Return Canceled");
         }
         //}
         
         // Clearly not currently doing much with the users cart.
         customer.clearCart();
+        
+        System.out.println("TRANSACTION " + this.getTransactionID() + " - SALE - End Transaction");
     }
     
     @Override

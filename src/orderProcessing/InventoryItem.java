@@ -52,13 +52,16 @@ public class InventoryItem {
     }
     public synchronized void increaseQuantityBy(int _quantity)
     {
-        System.out.println("adding " + _quantity + " to " + this.name + " quantity");
-        this.quantity += _quantity; 
-        System.out.println(this.name + " quantity now:" + this.quantity);
-
+        this.quantity += _quantity;
+        
+        System.out.println("INVENTORY - Increase " + this.name + " Quantity by " + _quantity);
+        System.out.println("INVENTORY - Current Quantity Of " + this.name + " Is " + this.quantity);
     }
     public synchronized void decreaseQuantityBy(int _quantity)
     {
-        this.quantity -= _quantity; 
+        this.quantity -= _quantity;
+        
+        System.out.println("INVENTORY - Decrease " + this.name + " Quantity by " + _quantity);
+        System.out.println("INVENTORY - Current Quantity Of " + this.name + " Is " + this.quantity);
     }
 }

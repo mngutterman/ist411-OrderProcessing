@@ -25,6 +25,7 @@ public class Exchange extends Transaction{
     @Override
     public void process()
     {
+        System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - Start Transaction");
         
         Map<String, InventoryItem> items = inventory.getItems();
         
@@ -55,15 +56,18 @@ public class Exchange extends Transaction{
                 {
                     synchronized(secondItem)
                     {
-                        System.out.println("WE DIDNT DEADLOCK");
                         if (inventoryItem.getQuantity() > 0)
                         {
                             inventoryItem.decreaseQuantityBy(1);
-                            customerItem.increaseQuantityBy(1);                    
+                            customerItem.increaseQuantityBy(1);
+                                                
+                            System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - " + inventoryItem.getName() + " decreased by 1");
+                            System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - " + customerItem.getName() + " increased by 1");
+
                         }
                         else
                         {
-                            System.out.println("We do not have this item in stock, sorry.");
+                            System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - Not Enough Inventory In Stock. Exchange Canceled");
                         }
                     }
                 }
@@ -72,13 +76,13 @@ public class Exchange extends Transaction{
             }
             else
             {
-                System.out.println("We do not carry the item you are trying to exchange, sorry");
+                System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - Do Not Carry Item. Exchange Canceled");
             }
         } else {
             // item does not exist in the inventory
-            System.out.println("We do not carry the item you want, sorry");
+            System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - Do Not Carry Item. Exchange Canceled");
         }
-        
+        System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - End Transaction");
     }
     
     @Override

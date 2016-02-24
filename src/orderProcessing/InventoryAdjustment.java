@@ -25,6 +25,8 @@ public class InventoryAdjustment extends Transaction{
     @Override
     public synchronized void process()
     {
+        System.out.println("TRANSACTION " + this.getTransactionID() + " - INVENTORY ADJUSTMENT - Start Transaction");
+        
         Map<String, InventoryItem> items = inventory.getItems();
         
         // If we do not carry the item, cancel the transaction
@@ -35,18 +37,20 @@ public class InventoryAdjustment extends Transaction{
                 if (item.getQuantity() + quantity >= 0)
                 {
                     item.increaseQuantityBy(this.quantity);
+                    System.out.println("TRANSACTION " + this.getTransactionID() + " - INVENTORY ADJUSTMENT - " + item.getName() + " adjusted by " + this.quantity);
                 }
                 else
                 {
-                    System.out.println("WE CANNOT ADJUST THIS QUANTITY OF INVENTORY");
+                    System.out.println("TRANSACTION " + this.getTransactionID() + " - INVENTORY ADJUSTMENT - Cannot Have Negative Inventory. Transaction Canceled");
                 }
             }
         } else {
             // item does not exist in the inventory
-            System.out.println("WE DO NOT CARRY THIS ITEM");
+            System.out.println("TRANSACTION " + this.getTransactionID() + " - INVENTORY ADJUSTMENT - Do Not Carry Item. Inventory Adjustment Canceled");
         }
         
-        
+        System.out.println("TRANSACTION " + this.getTransactionID() + " - INVENTORY ADJUSTMENT - End Transaction");
+
     }
     
     @Override

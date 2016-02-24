@@ -37,6 +37,8 @@ public class Order extends Transaction {
     @Override
     public void process()
     {
+        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Start Transaction");
+        
         Map<String, InventoryItem> items = inventory.getItems();
         InventoryItem item = items.get(itemName);
         
@@ -51,8 +53,8 @@ public class Order extends Transaction {
                 if (stockOfItem >= this.quantity)
                 {
                     // create a sale
-                    System.out.println("initiating sale of " + itemName);
-                    Sale sale = new Sale(0,item.getName(),quantity, customer);
+                    System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Initiated Sale");
+                    Sale sale = new Sale(this.transactionID,item.getName(),quantity, customer);
                     sale.process();
                 }
                 else if (stockOfItem > 0)
@@ -63,6 +65,8 @@ public class Order extends Transaction {
                     String response = reader.nextLine().toLowerCase();
                      */
                     
+                    System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Not Enough Inventory. Order Max Amount?");
+                    
                     Random rand = new Random();
                     int randomNumber = rand.nextInt(2) + 1;
 
@@ -70,28 +74,31 @@ public class Order extends Transaction {
 
                     if (customerWantsRemainingInventory/*response.equals(YES)*/)
                     {
-                        System.out.println("initiating sale of " + itemName);
-                        Sale sale = new Sale(0,item.getName(),stockOfItem, customer);
+                        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Customer Said Yes");
+                        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Initiated Modified Sale");
+                        Sale sale = new Sale(this.transactionID,item.getName(),stockOfItem, customer);
                         sale.process();
                     }
                     else
                     {
-                        System.out.println("Thanks anyways!");
+                        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Customer Said No. Order Canceled");
                     }                
 
                 } 
                 else
                 {
-                    System.out.println("We are currently all out of this item, sorry.");
+                        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Item Out Of Stock. Order Canceled");
                 }
 
             } 
         }
         else 
         {
-                // item does not exist in the inventory
-                System.out.println("We do not carry this item, sorry.");
+            // item does not exist in the inventory
+            System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Do Not Carry Item. Order Canceled");
         }
+        
+        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - End Transaction");
     }
     
     @Override

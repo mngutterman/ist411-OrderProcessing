@@ -25,6 +25,8 @@ public class Return extends Transaction{
     @Override
     public void process()
     {
+        System.out.println("TRANSACTION " + this.getTransactionID() + " - RETURN - Start Transaction");
+
         Map<String, InventoryItem> items = inventory.getItems();
         
         // If we do not carry the item, cancel the transaction
@@ -44,19 +46,22 @@ public class Return extends Transaction{
                         inventory.removeMoneyFromBankAccount(cashToReturnToCustomer);
                         //inventory.removeCash(cashToReturnToCustomer);
                         item.increaseQuantityBy(this.quantity);
+                        
+                        System.out.println("TRANSACTION " + this.getTransactionID() + " - RETURN - Removed " + cashToReturnToCustomer + " From Bank Account");
+                        System.out.println("TRANSACTION " + this.getTransactionID() + " - RETURN - Increased " + item.getName() + " Quantity By " + this.quantity);
                     }
                     else
                     {
-                        System.out.println("We do not have enough cash to give to you, sorry.");
+                        System.out.println("TRANSACTION " + this.getTransactionID() + " - RETURN - Not Enough Money In Bank Account. Return Canceled");
                     }
                 }
             }
         } else {
             // item does not exist in the inventory
-            System.out.println("We do not carry this item.");
+            System.out.println("TRANSACTION " + this.getTransactionID() + " - RETURN - Do Not Carry Item. Return Canceled");
         }
         
-        
+        System.out.println("TRANSACTION " + this.getTransactionID() + " - Return - End Transaction");
     }
     
     @Override
