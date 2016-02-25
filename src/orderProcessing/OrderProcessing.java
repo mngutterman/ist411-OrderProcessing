@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class OrderProcessing {
 
-    public static final int NUM_TRANSACTIONS = 1;
+    public static final int NUM_TRANSACTIONS = 100000;
     public static final int NUM_TRANSACTION_TYPES = 4;
     
     public static final int EXCHANGE = 1;
@@ -73,6 +73,13 @@ public class OrderProcessing {
         for(int x = 0; x< NUM_TRANSACTIONS; x++)
         {
             transactions[x].start();
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                // handle the exception...        
+                // For example consider calling Thread.currentThread().interrupt(); here.
+            }
         }
     }
     
