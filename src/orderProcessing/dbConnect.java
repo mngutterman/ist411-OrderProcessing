@@ -25,7 +25,7 @@ public static Connection ConnectionToMySql(){
     connection();
     
     //String host = "jdbc:mysql://localhost:*Port_Number*/*Database_Name*"; //FOR MAC 
-    String host = "jdbc:mysql://localhost:3306/*Database_Name*"; //FOR WINDOWS PC
+    String host = "jdbc:mysql://localhost/orderprocessing"; //FOR WINDOWS PC
     String Username = "root";
     String Password = "root";
     
