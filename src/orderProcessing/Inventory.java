@@ -80,16 +80,16 @@ public class Inventory {
     
     private void populateInventoryWithItems()
     {
-//        InventoryItem item1 = new InventoryItem(0, "pen",2, .50);
-//            InventoryItem item2 = new InventoryItem(1, "paper",1, 3.0);
-//        
-//        this.items.put(item1.getName(), item1);
-//        this.items.put(item2.getName(), item2);
-        try{
-            Connection conn = dbConnect.ConnectionToMySql();
-            Statement stmt = conn.createStatement();
+        InventoryItem item1 = new InventoryItem(0, "pen",2, .50);
+        InventoryItem item2 = new InventoryItem(1, "paper",1, 3.0);
+        
+        this.items.put(item1.getName(), item1);
+        this.items.put(item2.getName(), item2);
+        //try{
+        //    Connection conn = dbConnect.ConnectionToMySql();
+        //    Statement stmt = conn.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT * from inventoryitems"); // Put your own table name.
+            /*ResultSet rs = stmt.executeQuery("SELECT * from inventoryitems"); // Put your own table name.
             while ( rs.next() ) {
                 int itemId = rs.getInt("itemId");
                 String itemName = rs.getString("itemName");
@@ -97,12 +97,12 @@ public class Inventory {
                 double itemPrice = rs.getDouble("itemPrice");
                 
                 System.out.println("lkjsdfsd");
-            }
-            conn.close();
-        }
-        catch(Exception ex){
+            }*/
+        //    conn.close();
+        //}
+        //catch(Exception ex){
             
-        }
+        //}
     }
     
     

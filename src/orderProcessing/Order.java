@@ -8,7 +8,7 @@ package orderProcessing;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
-import static orderProcessing.OrderProcessing.NUM_TRANSACTION_TYPES;
+//import static orderProcessing.OrderProcessing.NUM_TRANSACTION_TYPES;
 
 /**
  *

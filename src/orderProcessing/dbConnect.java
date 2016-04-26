@@ -24,13 +24,15 @@ public static void connection(){
 public static Connection ConnectionToMySql(){
     connection();
     
-    //String host = "jdbc:mysql://localhost:*Port_Number*/*Database_Name*"; //FOR MAC 
-    String host = "jdbc:mysql://localhost/orderprocessing"; //FOR WINDOWS PC
+    String host = "jdbc:mysql://localhost:3306/orderprocessing?user=mdr5325"; //FOR MAC 
+    //String host = "jdbc:mysql://localhost/orderprocessing"; //FOR WINDOWS PC
     String Username = "root";
-    String Password = "root";
+    //String Password = "hKIQ_<tsT0lR";
+    String Password = "";
     
     try {
-        Connection connect = DriverManager.getConnection(host, Username, Password);
+        Connection connect = DriverManager.getConnection(host);
+//        Connection connect = DriverManager.getConnection(host, Username, Password);
         System.out.println("Connection Successful");
         return connect;
     } catch (SQLException e) {
