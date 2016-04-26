@@ -5,6 +5,10 @@
  */
 package orderProcessing;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /**
  *
  * @author Matt
@@ -48,11 +52,33 @@ public class InventoryItem {
     }
     public synchronized void setQuantity(int _quantity)
     {
-        this.quantity = _quantity; 
+        this.quantity = _quantity;
+        
+        try{
+            Connection conn = dbConnect.ConnectionToMySql();
+            Statement stmt = conn.createStatement();
+            String sql = "UPDATE inventoryitems SET itemQuantity=" + this.quantity + " WHERE itemId=" + this.id;
+            stmt.executeUpdate(sql);
+            System.out.println("here");
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        } 
     }
     public synchronized void increaseQuantityBy(int _quantity)
     {
         this.quantity += _quantity;
+        
+        try{
+            Connection conn = dbConnect.ConnectionToMySql();
+            Statement stmt = conn.createStatement();
+            String sql = "UPDATE inventoryitems SET itemQuantity=" + this.quantity + " WHERE itemId=" + this.id;
+            stmt.executeUpdate(sql);
+            System.out.println("here");
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        } 
         
         System.out.println("INVENTORY - Increase " + this.name + " Quantity by " + _quantity);
         System.out.println("INVENTORY - Current Quantity Of " + this.name + " Is " + this.quantity);
@@ -60,6 +86,17 @@ public class InventoryItem {
     public synchronized void decreaseQuantityBy(int _quantity)
     {
         this.quantity -= _quantity;
+        
+        try{
+            Connection conn = dbConnect.ConnectionToMySql();
+            Statement stmt = conn.createStatement();
+            String sql = "UPDATE inventoryitems SET itemQuantity=" + this.quantity + " WHERE itemId=" + this.id;
+            stmt.executeUpdate(sql);
+            System.out.println("here");
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        } 
         
         System.out.println("INVENTORY - Decrease " + this.name + " Quantity by " + _quantity);
         System.out.println("INVENTORY - Current Quantity Of " + this.name + " Is " + this.quantity);
