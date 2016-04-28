@@ -33,7 +33,7 @@ public class BankAccount {
             this.cash -= cashAmount;
             
             System.out.println("BANK ACCOUNT - Removing " + cashAmount + " From Bank Account");
-            System.out.println("BANK ACCOUNT - Current Bank Account Total Is $" + cash);
+            System.out.println("BANK ACCOUNT - Current Bank Account Total Is $" + cash); 
             return true;
         }
         else 

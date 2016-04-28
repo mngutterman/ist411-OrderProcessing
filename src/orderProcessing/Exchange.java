@@ -5,6 +5,8 @@
  */
 package orderProcessing;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.Map;
 
 /**
@@ -26,6 +28,7 @@ public class Exchange extends Transaction{
     public void process()
     {
         System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - Start Transaction");
+        this.log("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - Start Transaction");
         
         Map<String, InventoryItem> items = inventory.getItems();
         
@@ -63,7 +66,7 @@ public class Exchange extends Transaction{
                                                 
                             System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - " + inventoryItem.getName() + " decreased by 1");
                             System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - " + customerItem.getName() + " increased by 1");
-
+                                                       
                         }
                         else
                         {
