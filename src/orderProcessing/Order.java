@@ -37,7 +37,7 @@ public class Order extends Transaction {
     @Override
     public void process()
     {
-        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Start Transaction");
+        this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Start Transaction");
         
         Map<String, InventoryItem> items = inventory.getItems();
         InventoryItem item = items.get(itemName);
@@ -53,7 +53,7 @@ public class Order extends Transaction {
                 if (stockOfItem >= this.quantity)
                 {
                     // create a sale
-                    System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Initiated Sale");
+                    this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Initiated Sale");
                     Sale sale = new Sale(this.transactionID,item.getName(),quantity, customer);
                     sale.process();
                 }
@@ -61,11 +61,11 @@ public class Order extends Transaction {
                 {
                     // not enough in stock to fullfill order
                     /*Scanner reader = new Scanner(System.in);  // Reading from System.in
-                    System.out.println("There is only " + stockOfItem + " " + itemName + "(s) left. Would you like to purchase that amount? (y/n): ");
+                    this.log("There is only " + stockOfItem + " " + itemName + "(s) left. Would you like to purchase that amount? (y/n): ");
                     String response = reader.nextLine().toLowerCase();
                      */
                     
-                    System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Not Enough Inventory. Order Max Amount?");
+                    this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Not Enough Inventory. Order Max Amount?");
                     
                     Random rand = new Random();
                     int randomNumber = rand.nextInt(2) + 1;
@@ -74,20 +74,20 @@ public class Order extends Transaction {
 
                     if (customerWantsRemainingInventory/*response.equals(YES)*/)
                     {
-                        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Customer Said Yes");
-                        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Initiated Modified Sale");
+                        this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Customer Said Yes");
+                        this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Initiated Modified Sale");
                         Sale sale = new Sale(this.transactionID,item.getName(),stockOfItem, customer);
                         sale.process();
                     }
                     else
                     {
-                        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Customer Said No. Order Canceled");
+                        this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Customer Said No. Order Canceled");
                     }                
 
                 } 
                 else
                 {
-                        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Item Out Of Stock. Order Canceled");
+                        this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Item Out Of Stock. Order Canceled");
                 }
 
             } 
@@ -95,10 +95,10 @@ public class Order extends Transaction {
         else 
         {
             // item does not exist in the inventory
-            System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Do Not Carry Item. Order Canceled");
+            this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Do Not Carry Item. Order Canceled");
         }
         
-        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - End Transaction");
+        this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - End Transaction");
     }
     
     @Override

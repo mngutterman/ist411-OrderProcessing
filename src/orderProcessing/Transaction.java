@@ -37,6 +37,7 @@ public abstract class Transaction implements Runnable {
         catch(Exception ex){
             ex.printStackTrace();
         }
+        System.out.println(_log);
     }
 
     public abstract void process();        
