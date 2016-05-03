@@ -54,11 +54,12 @@ public class POS_Server extends Thread
 				DataInputStream in = new DataInputStream(client.getInputStream());	
                                 
 				int transactionType = in.readInt();
-                                int quantity = in.readInt();
+                                System.out.println(transactionType);
                                 String item1 = in.readUTF();
-                                String item2 = in.readUTF();
+                                int quantity = in.readInt();
+//                                String item2 = in.readUTF();
                                 
-				System.out.println("Transaction from " + client.getRemoteSocketAddress() + ": " + transactionType + ", " + quantity + ", " + item1 + ", " + item2);
+				System.out.println("Transaction from " + client.getRemoteSocketAddress() + ": " + transactionType + ", " + quantity + ", " + item1);
 				
                                 if(transactionType == 1)
                                     OrderProcessing.submitBuyTransaction(item1, quantity);
@@ -66,8 +67,8 @@ public class POS_Server extends Thread
                                     OrderProcessing.submitReturnTransaction(item1, quantity);
                                 else if(transactionType == 3)
                                     OrderProcessing.submitInventoryAdjustmentTransaction(item1, quantity);
-                                else if(transactionType == 4)
-                                    OrderProcessing.submitExchangeTransaction(item1, item2);
+//                                else if(transactionType == 4)
+//                                    OrderProcessing.submitExchangeTransaction(item1, item2);
                                 else
                                     System.out.println("Error: invalid transaction type");
                                 
