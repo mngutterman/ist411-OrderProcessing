@@ -80,12 +80,13 @@ public class Inventory {
     
     private void populateInventoryWithItems()
     {
+        /*
+        InventoryItem item1 = new InventoryItem(0, "pen",2, .50);
+        InventoryItem item2 = new InventoryItem(1, "paper",1, 3.0);
         
-//        InventoryItem item1 = new InventoryItem(0, "pen",2, .50);
-//        InventoryItem item2 = new InventoryItem(1, "paper",1, 3.0);
-//        
-//        this.items.put(item1.getName(), item1);
-//        this.items.put(item2.getName(), item2);
+        this.items.put(item1.getName(), item1);
+        this.items.put(item2.getName(), item2);
+        */
         try{
             Connection conn = dbConnect.ConnectionToMySql();
             Statement stmt = conn.createStatement();

@@ -19,6 +19,8 @@ public class Order extends Transaction {
     public static final int YES = 1;
     
     Inventory inventory = Inventory.getInstance();
+    PointOfSaleUI ui = PointOfSaleUI.getInstance();
+    
     private String itemName;
     private int quantity;
     private Customer customer;
@@ -38,7 +40,7 @@ public class Order extends Transaction {
     public void process()
     {
         System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Start Transaction");
-        
+                
         Map<String, InventoryItem> items = inventory.getItems();
         InventoryItem item = items.get(itemName);
         
@@ -64,7 +66,8 @@ public class Order extends Transaction {
                     System.out.println("There is only " + stockOfItem + " " + itemName + "(s) left. Would you like to purchase that amount? (y/n): ");
                     String response = reader.nextLine().toLowerCase();
                      */
-                    
+                    ui.sendAlertMessage("Not enough inventory to complete full order");
+
                     System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Not Enough Inventory. Order Max Amount?");
                     
                     Random rand = new Random();
@@ -72,6 +75,7 @@ public class Order extends Transaction {
 
                     boolean customerWantsRemainingInventory = randomNumber == YES;
 
+                   
                     if (customerWantsRemainingInventory/*response.equals(YES)*/)
                     {
                         System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Customer Said Yes");
@@ -82,12 +86,15 @@ public class Order extends Transaction {
                     else
                     {
                         System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Customer Said No. Order Canceled");
+                        ui.sendAlertMessage("Transaction canceled");
                     }                
 
                 } 
                 else
                 {
+                        
                         System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Item Out Of Stock. Order Canceled");
+                        ui.sendAlertMessage("item out of stock. transaction canceled");
                 }
 
             } 
@@ -96,6 +103,8 @@ public class Order extends Transaction {
         {
             // item does not exist in the inventory
             System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Do Not Carry Item. Order Canceled");
+            ui.sendAlertMessage("we do not carry this item. transaction canceled");
+
         }
         
         System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - End Transaction");

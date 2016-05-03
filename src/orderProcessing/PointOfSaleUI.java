@@ -5,12 +5,17 @@
  */
 package orderProcessing;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author mdr5325
  */
+
 public class PointOfSaleUI extends javax.swing.JFrame {
 
+    private static PointOfSaleUI UI = new PointOfSaleUI( );
+    
     public int orderType = -1;
     
     public static final int BUY = 1;
@@ -22,6 +27,15 @@ public class PointOfSaleUI extends javax.swing.JFrame {
      */
     public PointOfSaleUI() {
         initComponents();
+    }
+    
+    public synchronized static PointOfSaleUI getInstance( ) {
+      return UI;
+    }
+    
+    protected void sendAlertMessage(String message)
+    {
+        JOptionPane.showMessageDialog(null, message);
     }
 
     /**
@@ -228,10 +242,16 @@ public class PointOfSaleUI extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         String firstItemName = jTextField1.getText();
-        int firstItemQuantity = jTextField2.isVisible() ? 
+        int firstItemQuantity = jTextField2.isVisible() && isInteger(jTextField2.getText()) ? 
                 Integer.parseInt(jTextField2.getText())
                 : -1;
         
+        if (firstItemQuantity == -1 && jTextField2.isVisible()){
+            sendAlertMessage("you must enter a number");
+            return;
+        }
+        
+        //try{
         switch(orderType){
             case BUY:
                 OrderProcessing.submitBuyTransaction(firstItemName, firstItemQuantity);
@@ -247,7 +267,7 @@ public class PointOfSaleUI extends javax.swing.JFrame {
                 OrderProcessing.submitExchangeTransaction(firstItemName, secondItemName);
                 break;
         }
-
+        
         setAllItemRelatedControlsInvisible();
         enableAllTransactionTypeButtons();
         
@@ -255,6 +275,17 @@ public class PointOfSaleUI extends javax.swing.JFrame {
         jButton6.setEnabled(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    public boolean isInteger(String s) {
+        try { 
+            Integer.parseInt(s); 
+        } catch(NumberFormatException e) { 
+            return false; 
+        } catch(NullPointerException e) {
+            return false;
+        }
+
+        return true;
+    }
     private void prepareForASingleItemTransaction(){
         setFirstItemAndQuantityVisible();
         disableAllTransactionTypeButtons();

@@ -49,6 +49,7 @@ public class OrderProcessing {
         Transaction transaction = new Order(0, itemName, itemQuantity, customer);
         Thread thread = new Thread(transaction);
         thread.start();
+        
     }
     
     public static void submitReturnTransaction(String itemName, int itemQuantity)

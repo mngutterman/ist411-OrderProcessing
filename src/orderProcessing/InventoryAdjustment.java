@@ -13,6 +13,8 @@ import java.util.Map;
  */
 public class InventoryAdjustment extends Transaction{
     Inventory inventory = Inventory.getInstance();
+    PointOfSaleUI ui = PointOfSaleUI.getInstance();
+
     private String itemName;
     private int quantity;
     
@@ -38,15 +40,19 @@ public class InventoryAdjustment extends Transaction{
                 {
                     item.increaseQuantityBy(this.quantity);
                     System.out.println("TRANSACTION " + this.getTransactionID() + " - INVENTORY ADJUSTMENT - " + item.getName() + " adjusted by " + this.quantity);
+                    ui.sendAlertMessage("Successfully adjusted " + item.getName() + " by " + this.quantity);
+
                 }
                 else
                 {
                     System.out.println("TRANSACTION " + this.getTransactionID() + " - INVENTORY ADJUSTMENT - Cannot Have Negative Inventory. Transaction Canceled");
+                    ui.sendAlertMessage("cannot have negative inventory. transaction canceled");
                 }
             }
         } else {
             // item does not exist in the inventory
             System.out.println("TRANSACTION " + this.getTransactionID() + " - INVENTORY ADJUSTMENT - Do Not Carry Item. Inventory Adjustment Canceled");
+            ui.sendAlertMessage("we do not carry this item. transaction canceled");
         }
         
         System.out.println("TRANSACTION " + this.getTransactionID() + " - INVENTORY ADJUSTMENT - End Transaction");

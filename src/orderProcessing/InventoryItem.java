@@ -63,7 +63,7 @@ public class InventoryItem {
         }
         catch(Exception ex){
             ex.printStackTrace();
-        } 
+        }
     }
     public synchronized void increaseQuantityBy(int _quantity)
     {
@@ -78,7 +78,7 @@ public class InventoryItem {
         }
         catch(Exception ex){
             ex.printStackTrace();
-        } 
+        }
         
         System.out.println("INVENTORY - Increase " + this.name + " Quantity by " + _quantity);
         System.out.println("INVENTORY - Current Quantity Of " + this.name + " Is " + this.quantity);
@@ -96,7 +96,7 @@ public class InventoryItem {
         }
         catch(Exception ex){
             ex.printStackTrace();
-        } 
+        }
         
         System.out.println("INVENTORY - Decrease " + this.name + " Quantity by " + _quantity);
         System.out.println("INVENTORY - Current Quantity Of " + this.name + " Is " + this.quantity);

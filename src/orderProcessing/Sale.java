@@ -13,6 +13,8 @@ import java.util.Map;
  */
 public class Sale extends Transaction{
     Inventory inventory = Inventory.getInstance();
+    PointOfSaleUI ui = PointOfSaleUI.getInstance();
+
     private String itemName;
     private int quantity;
     private Customer customer;
@@ -43,12 +45,18 @@ public class Sale extends Transaction{
             inventory.addMoneyToBankAccount(cashToAddToInventory);
             //inventory.addCash(cashToAddToInventory);
             
+            String newItemName = this.quantity > 1 ? itemName + 's' : itemName;
+            
+            ui.sendAlertMessage("Successfully purchased " + this.quantity + " " + newItemName);
+            
             System.out.println("TRANSACTION " + this.getTransactionID() + " - SALE - Decreased " + item.getName() + " Quantity By " + this.quantity);
             System.out.println("TRANSACTION " + this.getTransactionID() + " - SALE - Added " + cashToAddToInventory + " to Bank Account");             
         }
         else 
         {
             System.out.println("TRANSACTION " + this.getTransactionID() + " - SALE - Not Enough Money In Bank Account. Return Canceled");
+            ui.sendAlertMessage("you don't have enough money. transaction canceled");
+
         }
         //}
         

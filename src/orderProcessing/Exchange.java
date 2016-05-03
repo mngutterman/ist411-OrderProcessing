@@ -13,6 +13,8 @@ import java.util.Map;
  */
 public class Exchange extends Transaction{
     Inventory inventory = Inventory.getInstance();
+    PointOfSaleUI ui = PointOfSaleUI.getInstance();
+
     private String customerItemName;   // What they have
     private String inventoryItemName;  // What they want
     
@@ -63,11 +65,12 @@ public class Exchange extends Transaction{
                                                 
                             System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - " + inventoryItem.getName() + " decreased by 1");
                             System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - " + customerItem.getName() + " increased by 1");
-
+                            ui.sendAlertMessage("successfully exchanged item: " + customerItem.getName() + " for item: " + inventoryItem.getName());
                         }
                         else
                         {
                             System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - Not Enough Inventory In Stock. Exchange Canceled");
+                            ui.sendAlertMessage("not enough inventory in stock. transaction canceled");
                         }
                     }
                 }
@@ -77,10 +80,13 @@ public class Exchange extends Transaction{
             else
             {
                 System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - Do Not Carry Item. Exchange Canceled");
+                ui.sendAlertMessage("we do not carry " + customerItemName + ". transaction canceled");
             }
         } else {
             // item does not exist in the inventory
             System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - Do Not Carry Item. Exchange Canceled");
+            ui.sendAlertMessage("we do not carry " + inventoryItemName + ". transaction canceled");
+
         }
         System.out.println("TRANSACTION " + this.getTransactionID() + " - EXCHANGE - End Transaction");
     }
