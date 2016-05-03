@@ -5,6 +5,12 @@
  */
 package orderProcessing;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
 import javax.swing.JOptionPane;
 
 /**
@@ -241,6 +247,8 @@ public class PointOfSaleUI extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        
+        
         String firstItemName = jTextField1.getText();
         int firstItemQuantity = jTextField2.isVisible() && isInteger(jTextField2.getText()) ? 
                 Integer.parseInt(jTextField2.getText())
@@ -251,8 +259,11 @@ public class PointOfSaleUI extends javax.swing.JFrame {
             return;
         }
         
+        startClient(orderType, firstItemName, firstItemQuantity);
+
+        
         //try{
-        switch(orderType){
+        /*switch(orderType){
             case BUY:
                 OrderProcessing.submitBuyTransaction(firstItemName, firstItemQuantity);
                 break;
@@ -266,7 +277,7 @@ public class PointOfSaleUI extends javax.swing.JFrame {
                 String secondItemName = jTextField3.getText();
                 OrderProcessing.submitExchangeTransaction(firstItemName, secondItemName);
                 break;
-        }
+        }*/
         
         setAllItemRelatedControlsInvisible();
         enableAllTransactionTypeButtons();
@@ -380,6 +391,65 @@ public class PointOfSaleUI extends javax.swing.JFrame {
                 new PointOfSaleUI().setVisible(true);
             }
         });
+        
+       
+    }
+    
+    public static void startClient(int orderType, String firstItemName, int firstItemQuantity){
+        String serverName = "localhost";
+        int port = 5001;
+        Socket serverConnection = makeConnection(serverName, port);
+        //Thread clientMessageHandler = new ClientMessageHandler(serverConnection);
+        //clientMessageHandler.start();
+
+        try
+        {            
+            sendMessage(serverConnection, orderType, firstItemName, firstItemQuantity);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Exception in TalkClient main()");
+        }	
+    }
+    
+    public static Socket makeConnection(String serverName, int port)
+    {
+        Socket serverConnection = null;
+        try
+        {
+
+                System.out.println("Connecting to " + serverName + " on port " + port);
+                serverConnection = new Socket(serverName, port);
+                System.out.println("Just connected to " + serverConnection.getRemoteSocketAddress());
+                OutputStream outToServer = serverConnection.getOutputStream();
+                DataOutputStream dataOutToServer = new DataOutputStream(outToServer);
+                dataOutToServer.writeUTF("Hello from " + serverConnection.getLocalSocketAddress());
+                InputStream inFromServer = serverConnection.getInputStream();
+                DataInputStream dataIn = new DataInputStream(inFromServer);
+                System.out.println("Server says: " + dataIn.readUTF());
+        }
+        catch(IOException e)
+        {
+                System.out.println("IOException in TalkClient makeConnection()");
+        }
+        return serverConnection;
+    }
+    
+    public static void sendMessage(Socket serverConnection, int orderType, String firstItemName, int firstItemQuantity)
+    {
+        try
+        {
+                OutputStream outToServer = serverConnection.getOutputStream();
+                DataOutputStream dataOutToServer = new DataOutputStream(outToServer);
+                dataOutToServer.writeInt(orderType);
+                dataOutToServer.writeUTF(firstItemName);
+                dataOutToServer.writeInt(firstItemQuantity);
+
+        }
+        catch(IOException e)
+        {
+                System.out.println("IOException in TalkClient sendMessage()");
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
