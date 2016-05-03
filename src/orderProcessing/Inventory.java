@@ -87,6 +87,7 @@ public class Inventory {
         this.items.put(item1.getName(), item1);
         this.items.put(item2.getName(), item2);
         */
+        
         try{
             Connection conn = dbConnect.ConnectionToMySql();
             Statement stmt = conn.createStatement();

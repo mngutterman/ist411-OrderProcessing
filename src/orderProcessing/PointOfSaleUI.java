@@ -259,25 +259,9 @@ public class PointOfSaleUI extends javax.swing.JFrame {
             return;
         }
         
-        startClient(orderType, firstItemName, firstItemQuantity);
-
+        String secondItemName = jTextField3.isVisible() ? jTextField3.getText() : "";
         
-        //try{
-        /*switch(orderType){
-            case BUY:
-                OrderProcessing.submitBuyTransaction(firstItemName, firstItemQuantity);
-                break;
-            case RETURN:
-                OrderProcessing.submitReturnTransaction(firstItemName, firstItemQuantity);
-                break;
-            case INVENTORY_ADJUSTMENT:
-                OrderProcessing.submitInventoryAdjustmentTransaction(firstItemName, firstItemQuantity);
-                break;
-            case EXCHANGE:
-                String secondItemName = jTextField3.getText();
-                OrderProcessing.submitExchangeTransaction(firstItemName, secondItemName);
-                break;
-        }*/
+        startClient(orderType, firstItemName, firstItemQuantity, secondItemName);
         
         setAllItemRelatedControlsInvisible();
         enableAllTransactionTypeButtons();
@@ -395,16 +379,16 @@ public class PointOfSaleUI extends javax.swing.JFrame {
        
     }
     
-    public static void startClient(int orderType, String firstItemName, int firstItemQuantity){
+    public static void startClient(int orderType, String firstItemName, int firstItemQuantity, String secondItemName){
         String serverName = "localhost";
         int port = 5001;
         Socket serverConnection = makeConnection(serverName, port);
-        //Thread clientMessageHandler = new ClientMessageHandler(serverConnection);
-        //clientMessageHandler.start();
+        Thread clientMessageHandler = new ClientMessageHandler(serverConnection);
+        clientMessageHandler.start();
 
         try
         {            
-            sendMessage(serverConnection, orderType, firstItemName, firstItemQuantity);
+            sendMessage(serverConnection, orderType, firstItemName, firstItemQuantity, secondItemName);
         }
         catch(Exception e)
         {
@@ -435,16 +419,14 @@ public class PointOfSaleUI extends javax.swing.JFrame {
         return serverConnection;
     }
     
-    public static void sendMessage(Socket serverConnection, int orderType, String firstItemName, int firstItemQuantity)
+    public static void sendMessage(Socket serverConnection, int orderType, String firstItemName, int firstItemQuantity, String secondItemName)
     {
         try
         {
                 OutputStream outToServer = serverConnection.getOutputStream();
                 DataOutputStream dataOutToServer = new DataOutputStream(outToServer);
-                dataOutToServer.writeInt(orderType);
-                dataOutToServer.writeUTF(firstItemName);
-                dataOutToServer.writeInt(firstItemQuantity);
-
+                System.out.println(orderType);
+                dataOutToServer.writeUTF(orderType + "," + firstItemName + "," + firstItemQuantity + "," + secondItemName);
         }
         catch(IOException e)
         {
