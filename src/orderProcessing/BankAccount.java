@@ -5,6 +5,9 @@
  */
 package orderProcessing;
 
+import java.sql.Connection;
+import java.sql.Statement;
+
 /**
  *
  * @author mdr5325
@@ -22,8 +25,8 @@ public class BankAccount {
     {
         this.cash += cashAmount;
         
-        System.out.println("BANK ACCOUNT - Adding " + cashAmount + " To Bank Account");
-        System.out.println("BANK ACCOUNT - Current Bank Account Total Is $" + cash);
+        this.log("BANK ACCOUNT - Adding " + cashAmount + " To Bank Account");
+        this.log("BANK ACCOUNT - Current Bank Account Total Is $" + cash);
     }
     
     public synchronized boolean removeCash(double cashAmount)
@@ -32,8 +35,8 @@ public class BankAccount {
         {
             this.cash -= cashAmount;
             
-            System.out.println("BANK ACCOUNT - Removing " + cashAmount + " From Bank Account");
-            System.out.println("BANK ACCOUNT - Current Bank Account Total Is $" + cash);
+            this.log("BANK ACCOUNT - Removing " + cashAmount + " From Bank Account");
+            this.log("BANK ACCOUNT - Current Bank Account Total Is $" + cash); 
             return true;
         }
         else 
@@ -45,6 +48,20 @@ public class BankAccount {
     public synchronized double getCash()
     {
         return this.cash;
+    }
+    
+    public void log(String _log)
+    {
+        try{
+            Connection conn = dbConnect.ConnectionToMySql();
+            Statement stmt = conn.createStatement();
+            String sql = "INSERT INTO `transactionlog`(`log`) VALUES ('" + _log + "')";
+            stmt.executeUpdate(sql);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+        System.out.println(_log);
     }
     
 }

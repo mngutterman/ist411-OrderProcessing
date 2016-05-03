@@ -39,8 +39,13 @@ public class Order extends Transaction {
     @Override
     public void process()
     {
+<<<<<<< HEAD
         System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Start Transaction");
                 
+=======
+        this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Start Transaction");
+        
+>>>>>>> 4411c5742059cd6e4db037a6a411fbe66d47515b
         Map<String, InventoryItem> items = inventory.getItems();
         InventoryItem item = items.get(itemName);
         
@@ -55,7 +60,7 @@ public class Order extends Transaction {
                 if (stockOfItem >= this.quantity)
                 {
                     // create a sale
-                    System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Initiated Sale");
+                    this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Initiated Sale");
                     Sale sale = new Sale(this.transactionID,item.getName(),quantity, customer);
                     sale.process();
                 }
@@ -63,12 +68,17 @@ public class Order extends Transaction {
                 {
                     // not enough in stock to fullfill order
                     /*Scanner reader = new Scanner(System.in);  // Reading from System.in
-                    System.out.println("There is only " + stockOfItem + " " + itemName + "(s) left. Would you like to purchase that amount? (y/n): ");
+                    this.log("There is only " + stockOfItem + " " + itemName + "(s) left. Would you like to purchase that amount? (y/n): ");
                     String response = reader.nextLine().toLowerCase();
                      */
+<<<<<<< HEAD
                     ui.sendAlertMessage("Not enough inventory to complete full order");
 
                     System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Not Enough Inventory. Order Max Amount?");
+=======
+                    
+                    this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Not Enough Inventory. Order Max Amount?");
+>>>>>>> 4411c5742059cd6e4db037a6a411fbe66d47515b
                     
                     Random rand = new Random();
                     int randomNumber = rand.nextInt(2) + 1;
@@ -78,23 +88,31 @@ public class Order extends Transaction {
                    
                     if (customerWantsRemainingInventory/*response.equals(YES)*/)
                     {
-                        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Customer Said Yes");
-                        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Initiated Modified Sale");
+                        this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Customer Said Yes");
+                        this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Initiated Modified Sale");
                         Sale sale = new Sale(this.transactionID,item.getName(),stockOfItem, customer);
                         sale.process();
                     }
                     else
                     {
+<<<<<<< HEAD
                         System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Customer Said No. Order Canceled");
                         ui.sendAlertMessage("Transaction canceled");
+=======
+                        this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Customer Said No. Order Canceled");
+>>>>>>> 4411c5742059cd6e4db037a6a411fbe66d47515b
                     }                
 
                 } 
                 else
                 {
+<<<<<<< HEAD
                         
                         System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Item Out Of Stock. Order Canceled");
                         ui.sendAlertMessage("item out of stock. transaction canceled");
+=======
+                        this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Item Out Of Stock. Order Canceled");
+>>>>>>> 4411c5742059cd6e4db037a6a411fbe66d47515b
                 }
 
             } 
@@ -102,12 +120,16 @@ public class Order extends Transaction {
         else 
         {
             // item does not exist in the inventory
+<<<<<<< HEAD
             System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - Do Not Carry Item. Order Canceled");
             ui.sendAlertMessage("we do not carry this item. transaction canceled");
 
+=======
+            this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - Do Not Carry Item. Order Canceled");
+>>>>>>> 4411c5742059cd6e4db037a6a411fbe66d47515b
         }
         
-        System.out.println("TRANSACTION " + this.getTransactionID() + " - ORDER - End Transaction");
+        this.log("TRANSACTION " + this.getTransactionID() + " - ORDER - End Transaction");
     }
     
     @Override

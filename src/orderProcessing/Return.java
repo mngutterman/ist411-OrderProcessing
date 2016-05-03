@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  *
- * @author mdr5325
+    * @author mdr5325
  */
 public class Return extends Transaction{
     Inventory inventory = Inventory.getInstance();
@@ -27,7 +27,7 @@ public class Return extends Transaction{
     @Override
     public void process()
     {
-        System.out.println("TRANSACTION " + this.getTransactionID() + " - RETURN - Start Transaction");
+        this.log("TRANSACTION " + this.getTransactionID() + " - RETURN - Start Transaction");
 
         Map<String, InventoryItem> items = inventory.getItems();
         
@@ -52,24 +52,24 @@ public class Return extends Transaction{
                         String newItemName = this.quantity > 1 ? itemName + 's' : itemName;
                         ui.sendAlertMessage("Successfully returned " + this.quantity + " " + newItemName);                        
                         
-                        System.out.println("TRANSACTION " + this.getTransactionID() + " - RETURN - Removed " + cashToReturnToCustomer + " From Bank Account");
-                        System.out.println("TRANSACTION " + this.getTransactionID() + " - RETURN - Increased " + item.getName() + " Quantity By " + this.quantity);
+                        this.log("TRANSACTION " + this.getTransactionID() + " - RETURN - Removed " + cashToReturnToCustomer + " From Bank Account");
+                        this.log("TRANSACTION " + this.getTransactionID() + " - RETURN - Increased " + item.getName() + " Quantity By " + this.quantity);
                     }
                     else
                     {
-                        System.out.println("TRANSACTION " + this.getTransactionID() + " - RETURN - Not Enough Money In Bank Account. Return Canceled");
                         ui.sendAlertMessage("we don't have enough money to give you. sorry");                        
+                        this.log("TRANSACTION " + this.getTransactionID() + " - RETURN - Not Enough Money In Bank Account. Return Canceled");
+
                     }
                 }
             }
         } else {
             // item does not exist in the inventory
-            System.out.println("TRANSACTION " + this.getTransactionID() + " - RETURN - Do Not Carry Item. Return Canceled");
             ui.sendAlertMessage("we do not carry this item");                        
-
+            this.log("TRANSACTION " + this.getTransactionID() + " - RETURN - Do Not Carry Item. Return Canceled");
         }
         
-        System.out.println("TRANSACTION " + this.getTransactionID() + " - Return - End Transaction");
+        this.log("TRANSACTION " + this.getTransactionID() + " - Return - End Transaction");
     }
     
     @Override
